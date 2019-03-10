@@ -1,0 +1,70 @@
+<!-- <h2>HTML Table</h2>
+<table>
+  <tr>
+    <td class="n">Company</td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td class='u'>Alfreds Futterkiste</td>
+    <td class='corner'></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td class='blank'></td>
+    <td class='blank'></td>
+    <td class='n'>Mexico</td>
+  </tr>
+  <tr>
+    <td class='blank'></td>
+    <td class='blank'></td>
+    <td class='u'>Austria</td>
+  </tr>
+  <tr>
+    <td class='n'>Island Trading</td>
+    <td class='right'></td>
+    <td class='blank'></td>
+  </tr>
+  <tr>
+    <td class='u'>Laughing Bacchus Winecellars</td>
+    <td class='top'></td>
+    <td class='blank'></td>
+  </tr>
+</table> -->
+<div class="container">
+  <div class="row">
+    <div class='col-sm'><strong>Teams:</strong></div>
+    <div class="col-sm">
+      <input type='text' [(ngModel)]='teamCount' />
+    </div>
+    <div class="col-sm">
+      <button class='btn btn-primary' (click)='createBracket(teamCount)'>
+        Create Bracket
+      </button>
+    </div>
+    <div class="col-sm">
+      <button class='btn btn-primary' (click)='dbBracket()'>
+        Use the Database
+      </button>
+    </div>
+  </div>
+</div>
+
+<div *ngIf='bracket'>
+  <h2>Bracket</h2>
+  <p> </p>
+  <hr style="border:1px grey">
+  <table class='table'>
+    <tbody>
+      <!-- <tr *ngFor="let row of bracket.tableData; let y = index">
+        <td *ngFor="let cell of row; let x = index" [ngClass]="cell.class">
+          <span *ngIf="cell.class == 'n' || cell.class == 'u'">Team: <b>{{cell.teamName}}</b></span>
+        </td> -->
+      <tr *ngFor="let row of bracket.tableData; let y = index">
+        <td *ngFor="let cell of row; let x = index" [ngClass]="cell.class">
+          <span *ngIf="cell.class == 'n' || cell.class == 'u'">Team: <b>{{ cell.teamName }}</b></span>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

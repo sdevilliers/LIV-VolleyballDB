@@ -1,0 +1,41 @@
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+td {
+    text-align: left;
+    padding: 8px;
+    width: 50px;
+}
+td.n {
+	border-top:solid;
+    border-left:solid;
+    border-right:solid
+}
+
+td.u {
+	border-bottom:solid;
+    border-left:solid;
+    border-right:solid;
+    background-color: #dddddd;
+}
+td.blank {
+    height: 10px;
+    border: 0;
+}
+td.top {
+	border-top:solid;
+}
+td.right {
+    border-right:solid
+}
+td.corner {
+	border-top:solid;
+    border-right:solid
+}
+select {
+    height: 33px;
+    width: 200px
+}

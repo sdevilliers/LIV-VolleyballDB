@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NameListService } from '../shared/name-list/name-list.service';
+import { BracketsComponent } from '../brackets/brackets.component';
 
 /**
  * This class represents the lazy loaded HomeComponent.
