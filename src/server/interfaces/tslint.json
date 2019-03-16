@@ -1,0 +1,6 @@
+{
+  "extends": "../../../tools/config/seed.tslint.json",
+  "rules": {
+    "class-name": false
+  }
+}

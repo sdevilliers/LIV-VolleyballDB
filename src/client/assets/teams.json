@@ -1,0 +1,14 @@
+[
+    {
+        "name": "Team1",
+        "players": {},
+        "seed": "1",
+        "captain": "Captain1"
+    },
+    {
+        "name": "Team2",
+        "players": {},
+        "seed": "2",
+        "captain": "Captain1"
+    }
+]

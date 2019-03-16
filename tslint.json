@@ -1,5 +1,7 @@
 {
   "extends": "./tools/config/seed.tslint.json",
   "rules": {
+    "max-line-length": [false, 140],
+    "one-line": false
   }
 }
