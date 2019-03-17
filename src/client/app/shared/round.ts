@@ -74,12 +74,12 @@ export class Round {                                    //takes in the round # a
 
         //assign locations to line previous matches up with empty (nameless) teams
         for (let r1MatchIdx = 0, r2MatchIdx = 0; r2MatchIdx < nextRound.length; r2MatchIdx++) {
-            if (nextRound[r2MatchIdx].teamOne.name === '') {
+            if (nextRound[r2MatchIdx].teamOne.TeamName === '') {
                 this.matches[r1MatchIdx].endRowIndex = nextRound[r2MatchIdx].startRowIndex;
                 this.matches[r1MatchIdx].startRowIndex = this.matches[r1MatchIdx].endRowIndex - 1;
                 r1MatchIdx++;
             }
-            if (nextRound[r2MatchIdx].teamTwo.name === '') {
+            if (nextRound[r2MatchIdx].teamTwo.TeamName === '') {
                 this.matches[r1MatchIdx].startRowIndex = nextRound[r2MatchIdx].endRowIndex;
                 this.matches[r1MatchIdx].endRowIndex = this.matches[r1MatchIdx].startRowIndex + 1;
                 r1MatchIdx++;

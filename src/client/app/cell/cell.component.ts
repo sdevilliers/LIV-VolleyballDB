@@ -26,6 +26,6 @@ export class CellComponent implements OnChanges{
     console.log('ngOnChanges for cell component');
   }
   onClick(): void {
-    this.cellClicked.emit(`The team ${this.team.name} was clicked!`);
+    this.cellClicked.emit(`The team ${this.team.TeamName} was clicked!`);
   }
 }
