@@ -45,7 +45,7 @@ export class BracketLogic {
             2 * neatSeeds.length <= teams.length;
             roundCount++ , neatSeeds = prevSeeds, prevSeeds = []
         ) {
-            const first: number = neatSeeds[1] + 1; //first seed of the seeds to be added to the previous round
+            const first: number = neatSeeds[1] + 1; //first Seed of the seeds to be added to the previous round
             const last: number = first + neatSeeds.length - 1; //last of the seeds to be added to the previous round
 
             // put players from this round as teamOne of each of the previous matches
@@ -163,13 +163,13 @@ export class BracketLogic {
         for (const round of rounds) {
             if (rounds.indexOf(round) === 0 && neat) {
                 for (const match of round.matches) {
-                    tableData[match.startRowIndex][rounds.indexOf(round)] = new Cell(match.teamOne.name, 'n');
-                    tableData[match.endRowIndex][rounds.indexOf(round)] = new Cell(match.teamTwo.name, 'u');
+                    tableData[match.startRowIndex][rounds.indexOf(round)] = new Cell(match.teamOne.TeamName, 'n');
+                    tableData[match.endRowIndex][rounds.indexOf(round)] = new Cell(match.teamTwo.TeamName, 'u');
                 }
             } else if (rounds.indexOf(round) <= 1 && !neat) {
                 for (const match of round.matches) {
-                    tableData[match.startRowIndex][rounds.indexOf(round)] = new Cell(match.teamOne.name, 'n');
-                    tableData[match.endRowIndex][rounds.indexOf(round)] = new Cell(match.teamTwo.name, 'u');
+                    tableData[match.startRowIndex][rounds.indexOf(round)] = new Cell(match.teamOne.TeamName, 'n');
+                    tableData[match.endRowIndex][rounds.indexOf(round)] = new Cell(match.teamTwo.TeamName, 'u');
                 }
             } else {
                 for (const match of round.matches) {

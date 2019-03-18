@@ -1,7 +1,10 @@
-export class Team {
-    name: string;
+import { iTeam } from './iTeam.interface';
+
+export class Team implements iTeam {
+    TeamsID: number;
+    TeamName: string;
+    Seed: number; //zero-based position of the team in terms of playing ability
     players: string[];
-    seed: number;         //zero-based position of the team in terms of playing ability
     captain: string;
     constructor(
         seed: number = -1,
@@ -9,9 +12,9 @@ export class Team {
         players: string[] = [''],
         captain: string = ''
     ) {
-        this.name = name;
+        this.TeamName = name;
         this.players = players;
-        this.seed = seed;
+        this.Seed = seed;
         this.captain = captain;
     }
 }

@@ -32,8 +32,8 @@ export class Match {
     }
 
     assignSeeds(seed1: number, seed2: number) {
-        this.teamOne.seed = seed1;
-        this.teamTwo.seed = seed2;
+        this.teamOne.Seed = seed1;
+        this.teamTwo.Seed = seed2;
     }
 
 }
