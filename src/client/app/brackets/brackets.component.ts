@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { BracketLogic } from './bracketLogic';
 import { Team } from '../shared/team';
-import { TeamService } from './team.service';
+import { TeamService } from '../shared/team.service';
 
 @Component({
   moduleId: module.id,
@@ -11,13 +11,13 @@ import { TeamService } from './team.service';
 })
 export class BracketsComponent implements OnInit {
 
-  bracket: BracketLogic;    //The data: a bracket object where all the tournament deatails are kept
+  bracket: BracketLogic;    //The data: a bracket object where all the tournament details are kept
   teamCount: number;
   teams: Team[];
   errorMessage: string;
   teamClickedAlert: string;
 
-  constructor(private mysqlService: TeamService) { //Injects ProductService so that the data for porducts can be accessed with the local variable productService
+  constructor(private myTeamService: TeamService) { //Injects TeamService so that the data for teams can be accessed with the local variable mysqlService
     if (this.teams === undefined) {
       this.teams = [];
     }
@@ -54,7 +54,7 @@ export class BracketsComponent implements OnInit {
 
   dbBracket(): void {
     let alertMessage: string;
-    this.mysqlService.getLocalTeamDatas().subscribe(
+    this.myTeamService.getLocalTeamDatas().subscribe(
       teams => {
         this.teams = teams;
       },
@@ -70,7 +70,7 @@ export class BracketsComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.mysqlService.getLocalTeamDatas().subscribe(
+    this.myTeamService.getLocalTeamDatas().subscribe(
       teams => {
         this.teams = teams;
       },
