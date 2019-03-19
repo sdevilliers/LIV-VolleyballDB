@@ -163,13 +163,13 @@ export class BracketLogic {
         for (const round of rounds) {
             if (rounds.indexOf(round) === 0 && neat) {
                 for (const match of round.matches) {
-                    tableData[match.startRowIndex][rounds.indexOf(round)] = new Cell(match.teamOne.name, 'n');
-                    tableData[match.endRowIndex][rounds.indexOf(round)] = new Cell(match.teamTwo.name, 'u');
+                    tableData[match.startRowIndex][rounds.indexOf(round)] = new Cell(match.teamOne, 'n');
+                    tableData[match.endRowIndex][rounds.indexOf(round)] = new Cell(match.teamTwo, 'u');
                 }
             } else if (rounds.indexOf(round) <= 1 && !neat) {
                 for (const match of round.matches) {
-                    tableData[match.startRowIndex][rounds.indexOf(round)] = new Cell(match.teamOne.name, 'n');
-                    tableData[match.endRowIndex][rounds.indexOf(round)] = new Cell(match.teamTwo.name, 'u');
+                    tableData[match.startRowIndex][rounds.indexOf(round)] = new Cell(match.teamOne, 'n');
+                    tableData[match.endRowIndex][rounds.indexOf(round)] = new Cell(match.teamTwo, 'u');
                 }
             } else {
                 for (const match of round.matches) {

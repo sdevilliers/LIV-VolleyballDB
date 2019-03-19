@@ -1,9 +1,11 @@
+import { Team } from '../shared/team';
+
 export class Cell {
-    teamName: string;
+    team: Team;
     class: string;
 
-    constructor(name: string = ' ', cls: string = 'blank'){
-        this.teamName = name;
+    constructor(team: Team = new Team(), cls: string = 'blank'){
+        this.team = team;
         this.class = cls;
     }
 }

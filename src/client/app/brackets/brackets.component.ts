@@ -15,6 +15,7 @@ export class BracketsComponent implements OnInit {
   teamCount: number;
   teams: Team[];
   errorMessage: string;
+  teamClickedAlert: string;
 
   constructor(private mysqlService: TeamService) { //Injects ProductService so that the data for porducts can be accessed with the local variable productService
     if (this.teams === undefined) {
@@ -75,5 +76,9 @@ export class BracketsComponent implements OnInit {
       },
       error => this.errorMessage = <any>error
     );
+  }
+
+  onTeamClicked(message: string): void {
+    this.teamClickedAlert = message;
   }
 }

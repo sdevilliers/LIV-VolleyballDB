@@ -10,13 +10,11 @@ import { Team } from '../shared/team';
 
 export class CellComponent implements OnChanges{
   @Input() team: Team;
-  class: string;
+  @Input() class: string;
   position: string;
 
   @Output() cellClicked: EventEmitter<string> = new EventEmitter<string>();
 
-  //TODO decide if you want to use this as a component with an input
-  //OR and object that uses a constructor to create a new team. Double input causes issues.
   constructor(){ //team: Team = new Team(), cls: string = 'blank'
     //this.team = team;
     //this.class = cls;
