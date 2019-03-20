@@ -1,7 +1,14 @@
 {
   "extends": "./tools/config/seed.tslint.json",
   "rules": {
+    "no-empty": false,
     "max-line-length": [false, 140],
+    "one-line": [true,
+      "check-catch",
+      "check-whitespace"
+    ],
+    "no-inferrable-types": [false],
+    "class-name": false,
     "one-line": false
   }
 }

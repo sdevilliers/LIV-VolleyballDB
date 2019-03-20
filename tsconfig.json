@@ -12,6 +12,7 @@
       "dom"
     ],
     "sourceMap": true,
+    "inlineSources": true,
     "pretty": true,
     "allowUnreachableCode": false,
     "allowUnusedLabels": false,
@@ -44,6 +45,9 @@
   "exclude": [
     "node_modules",
     "dist",
+    "typings/globals",
+    "typings/index.d.ts",
+    "typings/modules",
     "src"
   ],
   "compileOnSave": false

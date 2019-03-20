@@ -1,4 +1,4 @@
-import * as log from 'fancy-log';
+import * as util from 'gulp-util';
 import { join } from 'path';
 
 const fs = require('fs');
@@ -18,23 +18,24 @@ export = (done: any) => {
 
   try {
     fs.accessSync(checkFile, fs.F_OK);
-    log('Gulpfile has previously been compiled, rebuilding toolchain');
+    util.log('Gulpfile has previously been compiled, rebuilding toolchain');
     rebuild = true;
 
   } catch (e) {
-    log('Tools not compiled, skipping rebuild');
+    util.log('Tools not compiled, skipping rebuild');
     done();
   }
 
   // continue here to prevent other errors being caught...
   if (rebuild) {
-    log('Running \'clean.tools\' from check.tools');
+    util.log('Running \'clean.tools\' from check.tools');
     cleanTools();
 
-    log('Running \'build.tools\' from check.tools');
+    util.log('Running \'build.tools\' from check.tools');
     const build = buildTools();
 
     build.on('end', done);
+
   }
 
 };

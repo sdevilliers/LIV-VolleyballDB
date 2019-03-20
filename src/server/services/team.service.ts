@@ -6,7 +6,7 @@ import { DbManager } from '../db/dbManager';
 export class TeamService {
   private _dbManager: DbManager;
 
-  constructor(app: express.Application){
+  constructor(app: express.Application) {
     this._dbManager = new DbManager();
 
     //api function to create a team in the database

@@ -4,3 +4,5 @@ The command to generate this DB must be run from the src/db folder in the projec
 
 The specific command is:
 sequelize-auto -o "./Models" -d DatabaseName -h DBServerIP -u DBUserName -x DBPassword -c "./config/config.json" -e mysql
+To start mysql:
+cd to /usr/local/mysql(symbolic link)/supportfiles and run  sudo ./mysql.server start and or stop

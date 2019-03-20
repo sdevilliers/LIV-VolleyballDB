@@ -4,8 +4,6 @@ import * as path from 'path';
 import * as compression from 'compression';
 import * as routes from './routes';
 
-import { Init } from './db/redis';
-
 /**
  * Client Dir
  * @note `dev` default.
@@ -22,7 +20,7 @@ export async function init(port: string, mode: string) {
   app.use(compression());
 
   // DB Init
-  Init();
+  //Init();
 
   /**
    * Dev Mode.

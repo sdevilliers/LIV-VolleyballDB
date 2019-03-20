@@ -1,10 +1,10 @@
-import { iTeam } from '../interfaces/iTeam.interface.js';
+//import { iTeam } from '../interfaces/iTeam.interface.js';
 
 const dbUrl = 'localhost';
 const urlPort = '3306'; //optional ex. ':1433';
-const dbName = 'livvolleyball_database';
-const dbUserName = 'livdbadmin';
-const dbPassword = 'refridgerator';
+const dbName = 'starQuoter';
+const dbUserName = 'zenware';
+const dbPassword = 'z3nwar333!';
 const dbDialect = 'mysql';
 const dbModelPath = './Models';
 const SequelizeImporter = require('sequelize-auto-import');
@@ -26,7 +26,7 @@ export class DbManager {
 
   //region DB user access
 
-  addTeam(team: iTeam): Promise<iTeam> {
+  addTeam(team: any): Promise<any> {
     return this.TeamExists(team.TeamsID).then((result: Boolean) => {
       if (result === true) {
         Promise.reject('The team already exists');
@@ -52,7 +52,7 @@ export class DbManager {
     return Promise.resolve(false);
   }
 
-  getTeams(): Promise<iTeam[]> {
+  getTeams(): Promise<any[]> {
     return this.models.team.findAll();
   }
 }
