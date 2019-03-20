@@ -45,7 +45,7 @@ export class BracketLogic {
             2 * neatSeeds.length <= teams.length;
             roundCount++ , neatSeeds = prevSeeds, prevSeeds = []
         ) {
-            const first: number = neatSeeds[1] + 1; //first seed of the seeds to be added to the previous round
+            const first: number = neatSeeds[1] + 1; //first Seed of the seeds to be added to the previous round
             const last: number = first + neatSeeds.length - 1; //last of the seeds to be added to the previous round
 
             // put players from this round as teamOne of each of the previous matches

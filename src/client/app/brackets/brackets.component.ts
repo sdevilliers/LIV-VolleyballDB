@@ -30,8 +30,8 @@ export class BracketsComponent implements OnInit {
       this.teams = [];
       for (let i = 0; i < teamCount; i++) {
         this.teams[i] = new Team;
-        this.teams[i].name = 'Team' + (i + 1);
-        this.teams[i].seed = i + 1;
+        this.teams[i].TeamName = 'Team' + (i + 1);
+        this.teams[i].Seed = i + 1;
       }
     } else if (teamCount > 2000) {
       alertMessage = 'Yeah right. Somehow I doubt that you have that many friends';
@@ -54,7 +54,7 @@ export class BracketsComponent implements OnInit {
 
   dbBracket(): void {
     let alertMessage: string;
-    this.myTeamService.getLocalTeamDatas().subscribe(
+    this.myTeamService.getTeams().subscribe(
       teams => {
         this.teams = teams;
       },
@@ -70,7 +70,7 @@ export class BracketsComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.myTeamService.getLocalTeamDatas().subscribe(
+    this.myTeamService.getTeams().subscribe(
       teams => {
         this.teams = teams;
       },

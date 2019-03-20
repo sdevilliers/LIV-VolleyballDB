@@ -1,14 +1,24 @@
 [
     {
-        "name": "Team1",
-        "players": {},
-        "seed": "1",
-        "captain": "Captain1"
+        "TeamID": "1",
+        "TeamName": "Team1",
+        "Seed": "1",
+        "captian": "Captain101",
+        "playerTwo": "Bob",
+        "playerThree": "Joe",
+        "playerFour": "Blags",
+        "playerFive": "Richard Nixon",
+        "playerSix": "William Taft"
     },
     {
-        "name": "Team2",
-        "players": {},
-        "seed": "2",
-        "captain": "Captain1"
+        "TeamID": "2",
+        "TeamName": "Team2",
+        "Seed": "2",
+        "captian": "Captain1",
+        "playerTwo": "James",
+        "playerThree": "Samuel Scop",
+        "playerFour": "I am Number Four",
+        "playerFive": "Benjamin Janowski",
+        "playerSix": "Joseph Hansen"
     }
 ]

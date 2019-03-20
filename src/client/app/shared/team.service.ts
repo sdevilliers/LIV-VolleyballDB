@@ -1,19 +1,42 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
-import { catchError, tap } from 'rxjs/operators';
+import { catchError, tap, map } from 'rxjs/operators';
 
 import { Team } from './team';
+import { iTeam } from './iTeam.interface';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TeamService {
 
-  private teamUrl = 'assets/teams.json';
+  private teamUrl = 'assets/teams.json'; //TODO refactor the json file in both client and server side
 
   constructor(private http: HttpClient) { }
 
+  getTeams(): Observable<Team[]> {
+    return this.http.get<iTeam[]>(this.teamUrl).pipe(
+      map(this.mapiTeamsToTeams),
+      tap(data => console.log('All: ' + JSON.stringify(data))),
+      catchError(this.handleError)
+    );
+  }
+
+  getTeam(id: number): Observable<iTeam | undefined> {
+    return this.getTeams().pipe(
+      map((products: iTeam[]) => products.find(p => p.TeamsID === id))
+    );
+  }
+
+  private mapiTeamsToTeams(teams: iTeam[]): Team[] {
+    const retVal: Team[] = [];
+    teams.forEach((team: iTeam) => {
+      retVal.push(new Team().init(team));
+    });
+
+    return retVal;
+  }
   // public addMysqlTeamDatas(_firstname: string, _lastname: string) {
   //   const url = 'http://www.***YOUR_WEBSERVER***/post_users.php';
   //   const headers = new Headers();
@@ -31,13 +54,6 @@ export class TeamService {
   //     .map(rep => rep.json());
   // }
 
-  getLocalTeamDatas(): Observable<Team[]> {
-    return this.http.get<Team[]>(this.teamUrl).pipe(
-      tap(data => console.log('All: ' + JSON.stringify(data))),
-      catchError(this.handleError)
-    );
-  }
-
   // public getLocalTextDatas() {
   //   return this.http.get<Team[]>('./assets/read.txt').pipe(
   //     tap(data => console.log("All: " + JSON.stringify(data))),
@@ -46,16 +62,16 @@ export class TeamService {
   // }
 
   private handleError(err: HttpErrorResponse) {
-    //in a real worls app, we may send the server to some remote logging infastructure
-    //instead of just logging it to the console
+    // in a real world app, we may send the server to some remote logging infrastructure
+    // instead of just logging it to the console
     let errorMessage = '';
     if (err.error instanceof ErrorEvent) {
-      // a client-side or network error occured. Handle it accordingly.
-      errorMessage = 'An error occured: ' + err.error.message;
+      // A client-side or network error occurred. Handle it accordingly.
+      errorMessage = `An error occurred: ${err.error.message}`;
     } else {
-      // the backend returned an unsucessful response code.
-      // the response body may contain clues as to what went wrong.
-      errorMessage = 'Server returned code: ' + err.status + ', error message is: ' + err.message;
+      // The backend returned an unsuccessful response code.
+      // The response body may contain clues as to what went wrong,
+      errorMessage = `Server returned code: ${err.status}, error message is: ${err.message}`;
     }
     console.error(errorMessage);
     return throwError(errorMessage);
