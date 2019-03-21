@@ -36,7 +36,7 @@ export class BracketsComponent implements OnInit {
     } else if (teamCount > 2000) {
       alertMessage = 'Yeah right. Somehow I doubt that you have that many friends';
     } else if (teamCount < 2) {
-      alertMessage = 'You don\'t have enough teams to make a tournament. We used the database. \n Start networking. \n Find yourself some friends \n Facebook: https://www.facebook.com/';
+      alertMessage = 'You don\'t have enough teams to make a tournament. Try using the database. \n ...or start networking. \n Find some friends \n Facebook: https://www.facebook.com/';
       alert(alertMessage);
       this.dbBracket();
       return;

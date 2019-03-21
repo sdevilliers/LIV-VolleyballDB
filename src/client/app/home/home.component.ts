@@ -16,6 +16,7 @@ export class HomeComponent implements OnInit {
   newName = '';
   errorMessage: string;
   names: any[] = [];
+  title: 'LIV Volleyball';
 
   /**
    * Creates an instance of the HomeComponent with the injected

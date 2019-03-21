@@ -11,11 +11,9 @@ const rollup = require('rollup');
 
 const config = {
   input: join(Config.TMP_DIR, Config.BOOTSTRAP_FACTORY_PROD_MODULE),
-  output: {
-    name: 'main',
-    sourcemap: true
-  },
+  sourcemap: true,
   treeshake: true,
+  name: 'main',
   plugins: [
     includePaths({
       include: {},

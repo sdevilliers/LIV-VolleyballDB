@@ -31,5 +31,4 @@ test_script:
 #  - npm run tests.all
   - npm run test
 
-cache:
-  - '%APPDATA%\npm-cache'
+cache: node_modules -> package.json

@@ -1,11 +1,10 @@
-import * as colors from 'ansi-colors';
-import * as log from 'fancy-log';
 import * as gulp from 'gulp';
+import * as util from 'gulp-util';
 import Config from '../../config';
 import { join } from 'path';
 
 function reportError(message: string) {
-  log.error(colors.white.bgRed.bold(message));
+  console.error(util.colors.white.bgRed.bold(message));
   process.exit(1);
 }
 
@@ -20,7 +19,7 @@ export = () => {
     if (error !== null) {
       reportError('Angular Service Worker config error: ' + error + stderr);
     } else {
-      log('Angular Service Worker config success');
+      util.log('Angular Service Worker config success');
     }
   });
 

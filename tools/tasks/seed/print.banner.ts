@@ -1,19 +1,13 @@
-import * as colors from 'ansi-colors';
-import * as log from 'fancy-log';
+import Config from '../../config';
 import { readFile } from 'fs';
+import * as util from 'gulp-util';
 import { join } from 'path';
 
-import Config from '../../config';
-
 export = (done: any) => {
-  let bannerPath = join(Config.TOOLS_DIR, 'config', 'banner.txt');
-  const supportColor = require('supports-color');
-  if (supportColor.has256 || supportColor.stdout.has256) {
-    bannerPath = join(Config.TOOLS_DIR, 'config', 'banner-256.txt');
-  }
+  const bannerPath = join(Config.TOOLS_DIR, 'config', 'banner.txt');
   readFile(bannerPath, (e, content) => {
     if (!e) {
-      log(colors.green(content.toString()));
+      console.log(util.colors.green(content.toString()));
     }
     done();
   });

@@ -35,8 +35,7 @@ notifications:
   email: true
 
 cache:
-  directories:
-    - "$HOME/.npm"
+  directories: node_modules
 
 script:
 #  - npm run tests.all

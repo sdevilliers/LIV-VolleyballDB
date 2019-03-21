@@ -46,6 +46,9 @@
       <button class='btn btn-primary' (click)='dbBracket()'>
         Use the Database
       </button>
+      <button class='btn btn-primary' (click)='testGetTeams()'>
+       Get teams from db
+      </button>
     </div>
   </div>
 </div>
@@ -62,7 +65,7 @@
     <tbody>
       <!-- <tr *ngFor="let row of bracket.tableData; let y = index">
         <td *ngFor="let cell of row; let x = index" [ngClass]="cell.class">
-          <span *ngIf="cell.class == 'n' || cell.class == 'u'">Team: <b>{{cell.team}}</b></span>
+          <span *ngIf="cell.class == 'n' || cell.class == 'u'">Team: <b>{{cell.teamName}}</b></span>
         </td> -->
       <tr *ngFor="let row of bracket.tableData; let y = index">
         <td *ngFor="let cell of row; let x = index" [ngClass]="cell.class">

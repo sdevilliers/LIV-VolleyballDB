@@ -1,9 +1,9 @@
 /**
  * Module Import Guard
  *
- * @name throwIfAlreadyLoaded
+ * @TeamName throwIfAlreadyLoaded
  * @param {any} parentModule Parent module.
- * @param {string} moduleName - Module name.
+ * @param {string} moduleName - Module TeamName.
  *
  * @returns {any}
  */

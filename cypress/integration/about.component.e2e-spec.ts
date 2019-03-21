@@ -1,12 +1,10 @@
 describe('About', () => {
 
-  it('should have correct feature heading', () => {
+  beforeEach(() => {
     cy.visit('/about');
-    cy.get('sd-about h2').should('have.text', 'Features');
   });
 
-  it('should use our custom cypress command', () => {
-    cy.visitAbout();
+  it('should have correct feature heading', () => {
     cy.get('sd-about h2').should('have.text', 'Features');
   });
 
