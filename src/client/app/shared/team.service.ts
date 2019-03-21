@@ -25,12 +25,9 @@ export class TeamService {
 
   getTeam(id: number): Observable<Team | undefined> {
     return this.http.get<iTeam[]>(this.teamUrl).pipe(
-      map((myiTeams: iTeam[]) =>
-      {
-          const teams: any = this.mapiTeamsToTeams(myiTeams);
-          const retVal = teams.find((t: Team) => t.TeamsID === id);
-          return retVal;
-      }));
+      map(this.mapiTeamsToTeams),
+      map((teams: Team[]) => { return teams.find(t => t.TeamsID === id); })
+    );
   }
 
   private mapiTeamsToTeams(teams: iTeam[]): Team[] {
