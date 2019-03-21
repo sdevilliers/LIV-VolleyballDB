@@ -1,69 +1,54 @@
-<p>Hi There! This is the TeamManagerComponent</p>
-
 <div class='card'>
   <div class='card-header'>
-    {{ pageTitle }}
+    <div class="row">
+      <div class="col-md-4">
+        <h4>{{ pageTitle }}</h4>
+      </div>
+      <div class='col-md-4'>
+        <input placeholder="Search team name..." type='text'
+               [(ngModel)]='listFilter'/>
+      </div>
+    </div>
   </div>
   <div class='card body'>
-    <div class='row'>
-      <div class='col-md-2'>Filter by:</div>
-      <div class='col-md-4'>
-        <input type='text'
-               [(ngModel)] = 'listFilter' />
-      </div>
-    </div>
-    <div class = 'row'>
-      <div class='col-md-6'>
-        <h4>Filtered by: {{ listFilter }}</h4>
-      </div>
-    </div>
-    <div class= 'table responsive'>
-      <table class = 'table'
-             *ngIf = 'teams && teams.length'>
+    <div class='table responsive'>
+      <table class='table'
+             *ngIf='teams && teams.length'>
         <thead>
         <tr>
           <!--<th>-->
-            <!--<button class = 'btn btn-primary'-->
-                    <!--(click) = 'toggleImage()'>-->
-              <!--{{ showImage ? 'Hide' : 'Show' }} Image-->
-            <!--</button>-->
+          <!--<button class = 'btn btn-primary'-->
+          <!--(click) = 'toggleImage()'>-->
+          <!--{{ showImage ? 'Hide' : 'Show' }} Image-->
+          <!--</button>-->
           <!--</th>-->
           <th>Team</th>
-          <th>TeamID</th>
+          <th>Team ID</th>
           <th>Seed</th>
           <th>Captain</th>
-          <th>Players</th>
           <!--<th>Available</th>-->
           <!--<th>Fee Paid</th>-->
           <!--<th>5 Star Rating</th>-->
         </tr>
         </thead>
         <tbody>
-        <tr *ngFor= 'let team of filteredTeams'>
+        <tr *ngFor='let team of filteredTeams'>
           <!--<td>-->
-            <!--<img *ngIf = 'showImage'-->
-                 <!--[src] = 'team.imageUrl'-->
-                 <!--title = {{ team.TeamName }}-->
-                 <!--style.width.px = {{ imageWidth }}-->
-                 <!--style.margin.px = {{ imageMargin }}>-->
+          <!--<img *ngIf = 'showImage'-->
+          <!--[src] = 'team.imageUrl'-->
+          <!--title = {{ team.TeamName }}-->
+          <!--style.width.px = {{ imageWidth }}-->
+          <!--style.margin.px = {{ imageMargin }}>-->
           <!--</td>-->
           <td><a [routerLink]="['/team-manager', team.TeamsID]">{{ team.TeamName }}</a></td>
-          <td>{{ team.TeamsID | lowercase }}</td>
+          <td>{{ team.TeamsID }}</td>
           <td>{{ team.Seed }}</td>
           <td>{{ team.captian }}</td>
-          <td>
-            {{ team.captian }}\n
-            {{ team.playerTwo }}\n
-            {{ team.playerThree }}\n
-            {{ team.playerFour }}\n
-            {{ team.playerFive }}\n
-            {{ team.playerSix }}\n
-          </td>
           <!--<td>{{ team.availability }}</td>-->
           <!--<td>{{ team.amountPaid | currency: 'USD': 'symbol': '1.2-2'}}</td>-->
           <!--<td><pm-star-->
-            <!--[rating] = "team.starRating"-->
-            <!--(ratingClicked) = "onRatingClicked($event)"-->
+          <!--[rating] = "team.starRating"-->
+          <!--(ratingClicked) = "onRatingClicked($event)"-->
           <!--&gt;</pm-star></td>-->
         </tr>
         </tbody>

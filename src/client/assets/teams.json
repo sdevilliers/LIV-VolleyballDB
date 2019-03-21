@@ -1,24 +1,68 @@
 [
-    {
-        "TeamsID": 1,
-        "TeamName": "Team1",
-        "Seed": 1,
-        "captian": "Captain101",
-        "playerTwo": "Bob",
-        "playerThree": "Joe",
-        "playerFour": "Blags",
-        "playerFive": "Richard Nixon",
-        "playerSix": "William Taft"
-    },
-    {
-        "TeamsID": 2,
-        "TeamName": "Team2",
-        "Seed": 2,
-        "captian": "Captain1",
-        "playerTwo": "James",
-        "playerThree": "Samuel Scop",
-        "playerFour": "I am Number Four",
-        "playerFive": "Benjamin Janowski",
-        "playerSix": "Joseph Hansen"
-    }
+  {
+    "TeamsID": 1,
+    "TeamName": "Team1",
+    "Seed": 1,
+    "captian": "Captain101",
+    "playerTwo": "Bob",
+    "playerThree": "Joe",
+    "playerFour": "Blags",
+    "playerFive": "Richard Nixon",
+    "playerSix": "William Taft"
+  },
+  {
+    "TeamsID": 2,
+    "TeamName": "Team2",
+    "Seed": 2,
+    "captian": "Captain1",
+    "playerTwo": "James",
+    "playerThree": "Samuel Scop",
+    "playerFour": "I am Number Four",
+    "playerFive": "Benjamin Janowski",
+    "playerSix": "Joseph Hansen"
+  },
+  {
+    "TeamsID": 3,
+    "TeamName": "Brazen Broncos",
+    "Seed": 3,
+    "captian": "Captain1",
+    "playerTwo": "Kaylee Giles",
+    "playerThree": "Samuel Scop",
+    "playerFour": "Brad Pitt",
+    "playerFive": "Benjamin Janowski",
+    "playerSix": "Joseph Hansen"
+  },
+  {
+    "TeamsID": 420,
+    "TeamName": "Going Green",
+    "Seed": 4,
+    "captian": "Mary Jane",
+    "playerTwo": "Bob Marley",
+    "playerThree": "Ajani Green",
+    "playerFour": "I am Number Four-hundred-and-Twenty",
+    "playerFive": "Brage Jorgensen",
+    "playerSix": "Zander Whitehouse"
+  },
+  {
+    "TeamsID": 911,
+    "TeamName": "Terrible Tyrants",
+    "Seed": 5,
+    "captian": "Saddam Hussein",
+    "playerTwo": "Hitler",
+    "playerThree": "Mao Zedong",
+    "playerFour": "Stalin",
+    "playerFive": "Nikita Khrushchev",
+    "playerSix": "Attila the Hun"
+  },
+  {
+    "TeamsID": 58008,
+    "TeamName": "US vs the world",
+    "Seed": 6,
+    "captian": "Abraham Lincoln",
+    "playerTwo": "Barack Obama",
+    "playerThree": "Harry Truman",
+    "playerFour": "Ronald Reagan",
+    "playerFive": "Bill Clinton",
+    "playerSix": "Teddy Roosevelt"
+  }
 ]
