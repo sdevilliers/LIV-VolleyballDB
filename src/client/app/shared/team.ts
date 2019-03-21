@@ -7,11 +7,13 @@ export class Team implements iTeam{
     Seed: number;         //zero-based position of the team in terms of playing ability
     captian: string;
     constructor(
+        teamID?: number,
         seed?: number,
         name?: string,
         players?: string[],
         captain?: string
     ) {
+        this.TeamsID = teamID;
         this.TeamName = name;
         this.players = players;
         this.Seed = seed;

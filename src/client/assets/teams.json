@@ -1,6 +1,6 @@
 [
     {
-        "TeamID": "1",
+        "TeamsID": "1",
         "TeamName": "Team1",
         "Seed": "1",
         "captian": "Captain101",
@@ -11,7 +11,7 @@
         "playerSix": "William Taft"
     },
     {
-        "TeamID": "2",
+        "TeamsID": "2",
         "TeamName": "Team2",
         "Seed": "2",
         "captian": "Captain1",
