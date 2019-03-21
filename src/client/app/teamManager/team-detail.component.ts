@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { iTeam } from '../shared/iTeam.interface';
 import { TeamService } from '../shared/team.service';
+import { Team } from '../shared/team';
 
 
 @Component({
@@ -13,7 +13,7 @@ import { TeamService } from '../shared/team.service';
 export class TeamDetailComponent implements OnInit {
   pageTitle = 'Team Detail';
   errorMessage = '';
-  team: iTeam | undefined;
+  team: Team | undefined;
 
   constructor(private route: ActivatedRoute,
               private router: Router,
@@ -30,7 +30,9 @@ export class TeamDetailComponent implements OnInit {
 
   getTeam(id: number) {
     this.teamService.getTeam(id).subscribe(
-      team => this.team = team,
+      (team: any) => {
+        this.team = team;
+        },
       error => this.errorMessage = <any>error);
   }
 

@@ -1,8 +1,8 @@
 [
     {
-        "TeamsID": "1",
+        "TeamsID": 1,
         "TeamName": "Team1",
-        "Seed": "1",
+        "Seed": 1,
         "captian": "Captain101",
         "playerTwo": "Bob",
         "playerThree": "Joe",
@@ -11,9 +11,9 @@
         "playerSix": "William Taft"
     },
     {
-        "TeamsID": "2",
+        "TeamsID": 2,
         "TeamName": "Team2",
-        "Seed": "2",
+        "Seed": 2,
         "captian": "Captain1",
         "playerTwo": "James",
         "playerThree": "Samuel Scop",

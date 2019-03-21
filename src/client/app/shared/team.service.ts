@@ -23,10 +23,14 @@ export class TeamService {
     );
   }
 
-  getTeam(id: number): Observable<iTeam | undefined> {
-    return this.getTeams().pipe(
-      map((products: iTeam[]) => products.find(p => p.TeamsID === id))
-    );
+  getTeam(id: number): Observable<Team | undefined> {
+    return this.http.get<iTeam[]>(this.teamUrl).pipe(
+      map((myiTeams: iTeam[]) =>
+      {
+          const teams: any = this.mapiTeamsToTeams(myiTeams);
+          const retVal = teams.find((t: Team) => t.TeamsID === id);
+          return retVal;
+      }));
   }
 
   private mapiTeamsToTeams(teams: iTeam[]): Team[] {
