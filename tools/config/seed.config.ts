@@ -2,8 +2,6 @@ import { join } from 'path';
 import * as slash from 'slash';
 import { argv } from 'yargs';
 
-const magicImporter = require('node-sass-magic-importer');
-
 import {
   BuildType,
   ExtendPackages,
@@ -185,7 +183,7 @@ export class SeedConfig {
    * `index.html`.
    * @type {string}
    */
-  APP_TITLE = 'Welcome to angular-seed-express!';
+  APP_TITLE = 'Welcome to angular-seed!';
 
   /**
    * Tracking ID.
@@ -593,6 +591,8 @@ export class SeedConfig {
         'node_modules/@angular/common/bundles/common-http.umd.js',
       'tslib': 'node_modules/tslib/tslib.js',
       'rxjs': 'node_modules/rxjs',
+      'rxjs/operators': 'node_modules/rxjs/operators/index.js',
+      'rxjs/internal-compatibility': 'node_modules/rxjs/internal-compatibility/index.js',
       'dist/tmp/node_modules/*': 'dist/tmp/node_modules/*',
       'node_modules/*': 'node_modules/*',
       '*': 'node_modules/*'
@@ -655,6 +655,10 @@ export class SeedConfig {
         defaultExtension: 'js'
       },
       'rxjs/webSocket': {
+        main: 'index.js',
+        defaultExtension: 'js'
+      },
+      'rxjs/internal-compatibility': {
         main: 'index.js',
         defaultExtension: 'js'
       }
@@ -738,7 +742,6 @@ export class SeedConfig {
           ...this.PROXY_MIDDLEWARE
         ],
         port: this.PORT,
-        // port: this.SERVER_PORT,
         startPath: this.APP_BASE,
         open: argv['b'] ? false : true,
         injectChanges: false,
@@ -762,8 +765,7 @@ export class SeedConfig {
        * @type {object}
        */
       'gulp-sass': {
-        includePaths: ['./node_modules/'],
-        importer: magicImporter()
+        includePaths: ['./node_modules/']
       },
 
       /**

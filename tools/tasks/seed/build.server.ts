@@ -1,6 +1,7 @@
 import * as gulp from 'gulp';
 import * as gulpLoadPlugins from 'gulp-load-plugins';
 import * as merge from 'merge-stream';
+import * as util from 'gulp-util';
 import { join/*, sep, relative*/ } from 'path';
 
 import Config from '../../config';
@@ -35,6 +36,7 @@ export =
         isFullCompile = false;
         tsProject = makeTsProject({isolatedModules: true});
         projectFiles = projectFiles.pipe(plugins.cached());
+        util.log('Performing typeless TypeScript compile.');
       } else {
         tsProject = makeTsProject();
         projectFiles = merge(typings, projectFiles);

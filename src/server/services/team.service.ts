@@ -1,13 +1,12 @@
 import { iTeam } from '../interfaces/iTeam.interface.js';
 import * as express from 'express';
 import { DbManager } from '../db/dbManager';
-import { message } from 'gulp-typescript/release/utils';
 
 //server side api
 export class TeamService {
   private _dbManager: DbManager;
 
-  constructor(app: express.Application){
+  constructor(app: express.Application) {
     this._dbManager = new DbManager();
 
     //api function to create a team in the database

@@ -1,4 +1,3 @@
-
 export interface iTeam {
   TeamsID: number;
   TeamName: string;

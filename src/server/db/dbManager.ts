@@ -10,9 +10,6 @@ const dbModelPath = './Models';
 const SequelizeImporter = require('sequelize-auto-import');
 const Sequelize = require('sequelize');
 const op = Sequelize.Op;
-const Scriptify = require('scryptify');
-const decryptSync = Scriptify.decryptSync;
-const encryptSnyc = Scriptify.encryptSync;
 
 export class DbManager {
   protected _dbConnection = new Sequelize(

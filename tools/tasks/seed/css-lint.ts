@@ -11,7 +11,7 @@ import Config from '../../config';
 
 const plugins = <any>gulpLoadPlugins();
 
-const isProd = Config.ENV === 'prod';
+const isProd = Config.BUILD_TYPE === 'prod';
 const stylesheetType = Config.ENABLE_SCSS ? 'scss' : 'css';
 
 const processors = [
