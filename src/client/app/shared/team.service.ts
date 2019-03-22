@@ -11,20 +11,22 @@ import { iTeam } from './iTeam.interface';
 })
 export class TeamService {
 
-  private teamUrl = 'assets/teams.json'; //TODO refactor the json file in both client and server side
+  // private jsonFileUrl = 'assets/teams.json'; //TODO refactor the json file in both client and server side
+  // private dbUrl = '/api/team'
+  // private textUrl =
 
   constructor(private http: HttpClient) { }
 
-  getTeams(): Observable<Team[]> {
-    return this.http.get<iTeam[]>(this.teamUrl).pipe(
+  getTeams(url: string = 'assets/teams.json'): Observable<Team[]> {
+    return this.http.get<iTeam[]>(url).pipe(
       map(this.mapiTeamsToTeams),
       tap(data => console.log('All: ' + JSON.stringify(data))),
       catchError(this.handleError)
     );
   }
 
-  getTeam(id: number): Observable<Team | undefined> {
-    return this.http.get<iTeam[]>(this.teamUrl).pipe(
+  getTeam(id: number, url: string = 'assets/teams.json'): Observable<Team | undefined> {
+    return this.http.get<iTeam[]>(url).pipe(
       map(this.mapiTeamsToTeams),
       map((teams: Team[]) => { return teams.find(t => t.TeamsID === id); })
     );
@@ -34,6 +36,9 @@ export class TeamService {
     const retVal: Team[] = [];
     teams.forEach((team: iTeam) => {
       retVal.push(new Team().init(team));
+    });
+    teams.forEach((team: iTeam) => {
+      retVal[teams.indexOf(team)].players = [team.captian, team.playerTwo, team.playerThree, team.playerFour, team.playerFive, team.playerSix];
     });
 
     return retVal;
