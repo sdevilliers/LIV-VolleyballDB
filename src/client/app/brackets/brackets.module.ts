@@ -1,17 +1,19 @@
 import { NgModule } from '@angular/core';
 import { BracketsComponent } from './brackets.component';
 import { SharedModule } from '../shared/shared.module';
+import { CellComponent } from '../cell/cell.component';
 
 @NgModule({
   imports: [
-    SharedModule,
-    BracketsComponent
+    SharedModule
   ],
   declarations: [
-    BracketsComponent
+    BracketsComponent,
+    CellComponent
   ],
   exports: [
-    BracketsComponent
+    BracketsComponent,
+    CellComponent
   ]
 })
 export class BracketsModule { }

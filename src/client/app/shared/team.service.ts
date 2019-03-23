@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError, tap, map } from 'rxjs/operators';
 
@@ -11,24 +11,41 @@ import { iTeam } from './iTeam.interface';
 })
 export class TeamService {
 
-  // private jsonFileUrl = 'assets/teams.json'; //TODO refactor the json file in both client and server side
-  // private dbUrl = '/api/team'
+  jsonFileUrl = 'assets/teams.json'; //TODO refactor the json file in both client and server side
+  MysqlUrl = '/api/team';
   // private textUrl =
 
   constructor(private http: HttpClient) { }
 
-  getTeams(url: string = 'assets/teams.json'): Observable<Team[]> {
-    return this.http.get<iTeam[]>(url).pipe(
+  getJsonTeams(): Observable<Team[]> {
+    return this.http.get<iTeam[]>(this.jsonFileUrl).pipe(
       map(this.mapiTeamsToTeams),
       tap(data => console.log('All: ' + JSON.stringify(data))),
       catchError(this.handleError)
     );
   }
 
-  getTeam(id: number, url: string = 'assets/teams.json'): Observable<Team | undefined> {
-    return this.http.get<iTeam[]>(url).pipe(
+  getJsonTeam(id: number): Observable<Team | undefined> {
+    return this.http.get<iTeam[]>(this.jsonFileUrl).pipe(
       map(this.mapiTeamsToTeams),
       map((teams: Team[]) => { return teams.find(t => t.TeamsID === id); })
+    );
+  }
+
+  createMysqlTeam(team: iTeam): Observable<iTeam> {
+    const httpHeaders = new HttpHeaders()
+      .set('Content-Type', 'application/json');
+    const options = {
+      headers: httpHeaders
+    };
+    return this.http.post<iTeam>(this.MysqlUrl, team, options);
+  }
+
+  getMysqlTeams(): Observable<Team[]> {
+    return this.http.get<iTeam[]>(this.MysqlUrl).pipe(
+      map(this.mapiTeamsToTeams),
+      tap(data => console.log('All: ' + JSON.stringify(data))),
+      catchError(this.handleError)
     );
   }
 

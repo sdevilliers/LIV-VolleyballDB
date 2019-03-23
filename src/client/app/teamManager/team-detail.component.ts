@@ -29,7 +29,7 @@ export class TeamDetailComponent implements OnInit {
   }
 
   getTeam(id: number) {
-    this.teamService.getTeam(id).subscribe(
+    this.teamService.getJsonTeam(id).subscribe(
       (team: any) => {
         this.team = team;
         },

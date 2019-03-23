@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { BracketLogic } from './bracketLogic';
 import { Team } from '../shared/team';
 import { TeamService } from '../shared/team.service';
+import { CellComponent } from '../cell/cell.component';
 
 @Component({
   moduleId: module.id,
@@ -17,7 +18,7 @@ export class BracketsComponent implements OnInit {
   errorMessage: string;
   teamClickedAlert: string;
 
-  constructor(private myTeamService: TeamService) { //Injects TeamService so that the data for teams can be accessed with the local variable mysqlService
+  constructor(private teamService: TeamService) { //Injects TeamService so that the data for teams can be accessed with the local variable mysqlService
     if (this.teams === undefined) {
       this.teams = [];
     }
@@ -38,7 +39,6 @@ export class BracketsComponent implements OnInit {
     } else if (teamCount < 2) {
       alertMessage = 'You don\'t have enough teams to make a tournament. Try using the database. \n ...or start networking. \n Find some friends \n Facebook: https://www.facebook.com/';
       alert(alertMessage);
-      this.dbBracket();
       return;
     } else {
       alertMessage = 'You didn\'t specify an amount of teams, so we used the database.';
@@ -52,14 +52,18 @@ export class BracketsComponent implements OnInit {
     this.bracket = new BracketLogic(this.teams);
   }
 
-  dbBracket(): void {
-    let alertMessage: string;
-    this.myTeamService.getTeams().subscribe(
+  getAllTeams(): void {
+    this.teamService.getMysqlTeams().subscribe(
       teams => {
         this.teams = teams;
       },
       error => this.errorMessage = <any>error
     );
+  }
+
+  createMysqlBracket(): void {
+    let alertMessage: string;
+    this.getAllTeams();
     if (this.teams.length < 2) {
       alertMessage = 'You don\'t have enough teams to make a tournament. \n Start networking. \n Find yourself some friends \n Facebook: https://www.facebook.com/';
     }
@@ -69,8 +73,37 @@ export class BracketsComponent implements OnInit {
     this.bracket = new BracketLogic(this.teams);
   }
 
+  saveTeamTest(): void {
+    let teamSeed: number;
+    let teamID: number;
+    this.getAllTeams();
+    teamSeed = this.teams[this.teams.length - 1].Seed + 1;
+    teamID = this.teams[this.teams.length - 1].TeamsID + 1;
+    this.teamService.createMysqlTeam(
+      {
+        TeamsID: teamID,
+        TeamName: 'Santa\'s Sleigh',
+        Seed: teamSeed,
+        captian: 'Captain Rudolf',
+        playerTwo: 'Dasher',
+        playerThree: 'Prancer',
+        playerFour: 'Donner',
+        playerFive: 'Vixen',
+        playerSix: 'Comet'
+      }
+    ).subscribe(
+      team => {
+        console.log(team.toString());
+        this.getAllTeams();
+      },
+      err => {
+        console.log(err);
+      }
+    );
+  }
+
   ngOnInit() {
-    this.myTeamService.getTeams().subscribe(
+    this.teamService.getJsonTeams().subscribe(
       teams => {
         this.teams = teams;
       },

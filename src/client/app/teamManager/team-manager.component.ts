@@ -47,7 +47,7 @@ export class TeamManagerComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.teamService.getTeams().subscribe(
+    this.teamService.getJsonTeams().subscribe(
       teams => {
         this.teams = teams,
         this.filteredTeams = this.teams;
