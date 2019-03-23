@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { BracketLogic } from './bracketLogic';
 import { Team } from '../shared/team';
 import { TeamService } from '../shared/team.service';
-import { CellComponent } from '../cell/cell.component';
 
 @Component({
   moduleId: module.id,
@@ -35,16 +34,16 @@ export class BracketsComponent implements OnInit {
         this.teams[i].Seed = i + 1;
       }
     } else if (teamCount > 2000) {
-      alertMessage = 'Yeah right. Somehow I doubt that you have that many friends';
+      alertMessage = 'Too many teams. Try a number less than 2000';
     } else if (teamCount < 2) {
-      alertMessage = 'You don\'t have enough teams to make a tournament. Try using the database. \n ...or start networking. \n Find some friends \n Facebook: https://www.facebook.com/';
+      alertMessage = 'You don\'t have enough teams to make a tournament. You need at least 2';
       alert(alertMessage);
       return;
     } else {
       alertMessage = 'You didn\'t specify an amount of teams, so we used the database.';
     }
     if (this.teams.length < 2) {
-      alertMessage = 'You don\'t have enough teams to make a tournament.';
+      alertMessage = 'You don\'t have enough teams to make a tournament. You need at least 2';
     }
     if (alertMessage) {
       alert(alertMessage);
@@ -52,7 +51,7 @@ export class BracketsComponent implements OnInit {
     this.bracket = new BracketLogic(this.teams);
   }
 
-  getAllTeams(): void {
+  getAllMysqlTeams(): void {
     this.teamService.getMysqlTeams().subscribe(
       teams => {
         this.teams = teams;
@@ -63,9 +62,25 @@ export class BracketsComponent implements OnInit {
 
   createMysqlBracket(): void {
     let alertMessage: string;
-    this.getAllTeams();
+    this.getAllMysqlTeams();
     if (this.teams.length < 2) {
-      alertMessage = 'You don\'t have enough teams to make a tournament. \n Start networking. \n Find yourself some friends \n Facebook: https://www.facebook.com/';
+      alertMessage = 'You don\'t have enough teams to make a tournament. You need at least 2';
+    }
+    if (alertMessage) {
+      alert(alertMessage);
+    }
+    this.bracket = new BracketLogic(this.teams);
+  }
+
+  createJsonBracket(): void {
+    let alertMessage: string;
+    this.teamService.getJsonTeams().subscribe(
+      teams => {
+        this.teams = teams;
+      },
+      error => this.errorMessage = <any>error
+    );    if (this.teams.length < 2) {
+      alertMessage = 'You don\'t have enough teams to make a tournament.';
     }
     if (alertMessage) {
       alert(alertMessage);
@@ -76,13 +91,13 @@ export class BracketsComponent implements OnInit {
   saveTeamTest(): void {
     let teamSeed: number;
     let teamID: number;
-    this.getAllTeams();
+    this.getAllMysqlTeams();
     teamSeed = this.teams[this.teams.length - 1].Seed + 1;
     teamID = this.teams[this.teams.length - 1].TeamsID + 1;
     this.teamService.createMysqlTeam(
       {
         TeamsID: teamID,
-        TeamName: 'Santa\'s Sleigh',
+        TeamName: `Santa\'s Sleigh ${teamSeed}`,
         Seed: teamSeed,
         captian: 'Captain Rudolf',
         playerTwo: 'Dasher',
@@ -94,7 +109,7 @@ export class BracketsComponent implements OnInit {
     ).subscribe(
       team => {
         console.log(team.toString());
-        this.getAllTeams();
+        this.getAllMysqlTeams();
       },
       err => {
         console.log(err);
