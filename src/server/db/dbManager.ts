@@ -2,9 +2,9 @@ import { iTeam } from '../interfaces/iTeam.interface.js';
 
 const dbUrl = 'localhost';
 const urlPort = '3306'; //optional ex. ':1433';
-const dbName = 'starQuoter';
-const dbUserName = 'zenware';
-const dbPassword = 'z3nwar333!';
+const dbName = 'livvolleyball_database';
+const dbUserName = 'sdevilliers';
+const dbPassword = 'Fr!dg3s1';
 const dbDialect = 'mysql';
 const dbModelPath = './Models';
 const SequelizeImporter = require('sequelize-auto-import');
@@ -36,7 +36,7 @@ export class DbManager {
       }
       else
       {
-        return this.models.team.create({
+        return this.models.teams.create({
           TeamID: team.TeamsID,
           TeamName: team.TeamName,
           Seed: team.Seed,
@@ -55,7 +55,7 @@ export class DbManager {
   }
 
   getTeams(): Promise<iTeam[]> {
-    return this.models.team.findAll();
+    return this.models.teams.findAll();
   }
 
   }
