@@ -56,6 +56,15 @@ export class TeamService {
     );
   }
 
+  updateMySqlTeam(team: iTeam): Observable<iTeam> {
+    const httpHeaders = new HttpHeaders()
+      .set('Content-Type', 'application/json');
+    const options = {
+      headers: httpHeaders
+    };
+    return this.http.patch<iTeam>(this.MysqlUrl, team, options);
+  }
+
   private mapiTeamsToTeams(teams: iTeam[]): Team[] {
     const retVal: Team[] = [];
     teams.forEach((team: iTeam) => {
@@ -67,22 +76,6 @@ export class TeamService {
 
     return retVal;
   }
-  // public addMysqlTeamDatas(_firstname: string, _lastname: string) {
-  //   const url = 'http://www.***YOUR_WEBSERVER***/post_users.php';
-  //   const headers = new Headers();
-  //   headers.append('Content-Type', 'application/x-www-form-urlencoded');
-  //   return this._http.post(url, { id: '', firstname: _firstname, lastname: _lastname }, { headers: headers })
-  //     .map((res: Response) => res.text())
-  //     .subscribe(res => {
-  //       console.log(res.toString());
-  //     });
-  // }
-
-  // public getMysqlTeamDatas() {
-  //   return this._http.get('http://www.***YOUR_WEBSERVER***/get_users.php')
-  //     /*.do(x => console.log(x))**/
-  //     .map(rep => rep.json());
-  // }
 
   // public getLocalTextDatas() {
   //   return this.http.get<Team[]>('./assets/read.txt').pipe(

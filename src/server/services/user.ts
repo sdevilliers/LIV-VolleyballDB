@@ -42,7 +42,7 @@ export class User implements iUser {
       //https://stackoverflow.com/questions/20310369/declare-a-delegate-type-in-typescript
       Save(cb: any): any {
           // Then save the user
-          this._dbManager.addTeam(this, (err: Error, user: iUser) => {
+          this._dbManager.createTeam(this, (err: Error, user: iUser) => {
               if (err) {
                   return cb(err);
               } else {

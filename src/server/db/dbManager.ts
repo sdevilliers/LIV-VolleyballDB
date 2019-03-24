@@ -26,18 +26,15 @@ export class DbManager {
 
   //region DB user access
 
-  addTeam(team: iTeam): Promise<iTeam> {
-    return this.TeamExists(team.TeamsID).then((result: Boolean) => {
-      if (result === true)
-      {
-        Promise.reject('The team already exists');
+  createTeam(team: iTeam): Promise<iTeam> {
+    return this.teamNameAlreadyExists(team).then((result: Boolean) => {
+      if (result === true) {
         //TODO do something useful here
         console.log('Unable to add team: ' + team.TeamName);
-      }
-      else
-      {
+        return Promise.reject('The team already exists');
+      } else {
         return this.models.teams.create({
-          TeamID: team.TeamsID,
+          TeamsID: undefined,
           TeamName: team.TeamName,
           Seed: team.Seed,
           captian: team.captian,
@@ -45,20 +42,72 @@ export class DbManager {
           playerThree: team.playerThree,
           playerFour: team.playerFour,
           playerFive: team.playerFive,
-          playerSix: team.playerSix});
+          playerSix: team.playerSix
+        });
       }
     });
   }
 
-  TeamExists(teamID: number): Promise<boolean> {
-    return Promise.resolve(false);
+  updateTeam(team: iTeam): Promise<iTeam> {
+    return this.models.teams.update(
+      {
+        TeamID: team.TeamsID,
+        TeamName: team.TeamName,
+        Seed: team.Seed,
+        captian: team.captian,
+        playerTwo: team.playerTwo,
+        playerThree: team.playerThree,
+        playerFour: team.playerFour,
+        playerFive: team.playerFive,
+        playerSix: team.playerSix
+      },
+      {
+        where: {TeamsID: team.TeamsID}
+      }
+    );
   }
 
-  getTeams(): Promise<iTeam[]> {
+  teamNameAlreadyExists(team: iTeam): Promise<boolean> {
+    // const myPrimaryPhone: iUserPhone = phoneNumbers.find((phone: iUserPhone) => {
+    //   return phone.IsPrimary === true;
+    // });
+
+    return this.models.teams.findOne(
+      {
+        where: {teamName: team.TeamName}
+      }
+    ).then((retVal: any) => {
+      return retVal !== null;
+    });
+  }
+
+  readTeams(): Promise<iTeam[]> {
     return this.models.teams.findAll();
   }
 
-  }
+  // updateTeam(team: iTeam): Promise<iTeam> {
+  //   return this.TeamExists(team.TeamsID).then((result: Boolean) => {
+  //     if (result === false) {
+  //       Promise.reject('The team does not exist');
+  //       //TODO do something useful here
+  //       console.log('Unable to update ' + team.TeamName + ' because the team does not exist in the database');
+  //     } else {
+  //       return this.models.teams.patch({
+  //         TeamID: team.TeamsID,
+  //         TeamName: team.TeamName,
+  //         Seed: team.Seed,
+  //         captian: team.captian,
+  //         playerTwo: team.playerTwo,
+  //         playerThree: team.playerThree,
+  //         playerFour: team.playerFour,
+  //         playerFive: team.playerFive,
+  //         playerSix: team.playerSix
+  //       });
+  //     }
+  //   });
+  // }
+
+}
 
 //   validateUser(user: iTeam, password: string) {
 //     /** Setup a 256 bytes or 32 characters secret with the randomstring package */

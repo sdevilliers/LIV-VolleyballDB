@@ -71,4 +71,27 @@ export class TeamDetailComponent implements OnInit {
       }
     );
   }
+
+  updateTeam() {
+    this.teamService.updateMySqlTeam(
+      {
+        TeamsID: this.team.TeamsID,
+        TeamName: this.team.TeamName,
+        Seed: this.team.Seed,
+        captian: this.team.players[0],
+        playerTwo: this.team.players[1],
+        playerThree: this.team.players[2],
+        playerFour: this.team.players[3],
+        playerFive: this.team.players[4],
+        playerSix: this.team.players[5]
+      }
+    ).subscribe(
+      team => {
+        console.log(team.toString());
+      },
+      err => {
+        console.log(err);
+      }
+    );
+  }
 }

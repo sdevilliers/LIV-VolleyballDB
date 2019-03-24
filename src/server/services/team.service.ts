@@ -10,26 +10,33 @@ export class TeamService {
     this._dbManager = new DbManager();
 
     //api function to create a team in the database
-    const createTeamHandler = (req: express.Request, res: express.Response,
-                               next: express.NextFunction) => {
+    const createTeamHandler = (req: express.Request, res: express.Response, next: express.NextFunction) => {
       const myTeam: iTeam = req.body;
-      this._dbManager.addTeam(myTeam).then(
+      this._dbManager.createTeam(myTeam).then(
         (myTeam: iTeam) => { res.send(myTeam); },
-        (err: Error) => { res.status(500).send( { message: err.message }); }
+        (err: Error) => { res.status(500).send( { message: 'createTeam error:' + err.message }); }
       );
     };
     app.post('/api/team', createTeamHandler);
 
     //api function to get all the teams from the database
-    const readTeamsHandler = (req: express.Request, res: express.Response,
-                              next: express.NextFunction) => {
-      const myTeams: iTeam[] = req.body;
-      this._dbManager.getTeams().then(
+    const readTeamsHandler = (req: express.Request, res: express.Response, next: express.NextFunction) => {
+      this._dbManager.readTeams().then(
         (myTeams: iTeam[]) => { res.send(myTeams); },
-        (err: Error) => { res.status(500).send({message: err.message}); }
+        (err: Error) => { res.status(500).send({message: 'readTeams error:' + err.message}); }
       );
     };
     app.get('/api/team', readTeamsHandler);
+
+    //api function to edit a team already in the database
+    const updateTeamsHandler = (req: express.Request, res: express.Response, next: express.NextFunction) => {
+      const myTeam: iTeam = req.body;
+      this._dbManager.updateTeam(myTeam).then(
+        (myTeam: iTeam) => { res.send(myTeam); },
+        (err: Error) => { res.status(500).send({message: 'updateTeam error:' + err.message}); }
+      );
+    };
+    app.patch('/api/team', updateTeamsHandler);
   }
 }
 
@@ -38,7 +45,7 @@ export class TeamService {
 //     (req: express.Request, res: express.Response,
 //       next: express.NextFunction) => {})
 // //
-// //       this._dbManager.addTeam(this, (err: Error, team: iTeam) => {
+// //       this._dbManager.createTeam(this, (err: Error, team: iTeam) => {
 // //   if (err) {
 // //     return cb(err);
 // //   } else {
