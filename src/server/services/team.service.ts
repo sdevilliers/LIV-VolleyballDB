@@ -14,7 +14,7 @@ export class TeamService {
       const myTeam: iTeam = req.body;
       this._dbManager.createTeam(myTeam).then(
         (myTeam: iTeam) => { res.send(myTeam); },
-        (err: Error) => { res.status(500).send( { message: 'createTeam error:' + err.message }); }
+        (err: Error) => { res.status(500).send( { message: 'createTeam error: ' + err.message }); }
       );
     };
     app.post('/api/team', createTeamHandler);
@@ -23,7 +23,7 @@ export class TeamService {
     const readTeamsHandler = (req: express.Request, res: express.Response, next: express.NextFunction) => {
       this._dbManager.readTeams().then(
         (myTeams: iTeam[]) => { res.send(myTeams); },
-        (err: Error) => { res.status(500).send({message: 'readTeams error:' + err.message}); }
+        (err: Error) => { res.status(500).send({message: 'readTeams error: ' + err.message}); }
       );
     };
     app.get('/api/team', readTeamsHandler);
@@ -33,10 +33,20 @@ export class TeamService {
       const myTeam: iTeam = req.body;
       this._dbManager.updateTeam(myTeam).then(
         (myTeam: iTeam) => { res.send(myTeam); },
-        (err: Error) => { res.status(500).send({message: 'updateTeam error:' + err.message}); }
+        (err: Error) => { res.status(500).send({message: 'updateTeam error: ' + err.message}); }
       );
     };
     app.patch('/api/team', updateTeamsHandler);
+
+    //api function to delete a team already in the database
+    const deleteTeamsHandler = (req: express.Request, res: express.Response, next: express.NextFunction) => {
+      const myTeam: iTeam = req.body;
+      this._dbManager.deleteTeam(myTeam).then(
+        (myTeam: iTeam) => { res.send(myTeam); },
+        (err: Error) => { res.status(500).send({message: 'deleteTeam error: ' + err.message}); }
+      );
+    };
+    app.delete('/api/team', deleteTeamsHandler);
   }
 }
 
