@@ -94,4 +94,11 @@ export class TeamDetailComponent implements OnInit {
       }
     );
   }
+
+  deleteTeam() {
+    if (this.team.TeamsID){
+      this.teamService.deleteMySqlTeam(this.team);
+      this.router.navigate(['/team-manager']);
+    }
+  }
 }
