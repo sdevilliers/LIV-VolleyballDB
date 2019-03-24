@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Team } from '../shared/team';
 import { TeamService } from '../shared/team.service';
 import { iTeam } from '../shared/iTeam.interface';
+import { Router } from '@angular/router';
 
 @Component({
   moduleId: module.id,
@@ -20,10 +21,21 @@ export class TeamManagerComponent implements OnInit {
   imageMargin = 2;
   showImage = false;
 
-  constructor(private teamService: TeamService) {
+  constructor(private teamService: TeamService,
+              private router: Router) {
     if (this.teams === undefined) {
       this.teams = [];
     }
+  }
+
+  ngOnInit() {
+    this.teamService.getMysqlTeams().subscribe(
+      teams => {
+        this.teams = teams,
+          this.filteredTeams = this.teams;
+      },
+      error => this.errorMessage = <any>error
+    );
   }
 
   get listFilter(): string {
@@ -46,18 +58,11 @@ export class TeamManagerComponent implements OnInit {
     this.showImage = !this.showImage;
   }
 
-  ngOnInit() {
-    this.teamService.getJsonTeams().subscribe(
-      teams => {
-        this.teams = teams,
-        this.filteredTeams = this.teams;
-      },
-      error => this.errorMessage = <any>error
-    );
-  }
-
   onRatingClicked(message: string): void {
     this.pageTitle = 'Player List ' + message;
   }
 
+  newTeam() {
+    this.router.navigate(['/team-manager', 'new']);
+  }
 }

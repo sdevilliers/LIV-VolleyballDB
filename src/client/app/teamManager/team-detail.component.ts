@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TeamService } from '../shared/team.service';
 import { Team } from '../shared/team';
+import { outOfBoundsError } from '@angular/core/src/di/reflective_errors';
 
 
 @Component({
@@ -13,6 +14,7 @@ import { Team } from '../shared/team';
 export class TeamDetailComponent implements OnInit {
   pageTitle = 'Team Detail';
   errorMessage = '';
+  id: string;
   team: Team | undefined;
 
   constructor(private route: ActivatedRoute,
@@ -21,15 +23,19 @@ export class TeamDetailComponent implements OnInit {
   }
 
   ngOnInit() {
-    const param = this.route.snapshot.paramMap.get('id');
-    if (param) {
-      const id = +param;
-      this.getTeam(id);
+    this.id = this.route.snapshot.paramMap.get('id');
+    if (this.id) {
+      if (this.id === 'new') {
+        this.team = new Team(undefined, undefined, 'New Team', ['Captain/Player 1', 'Player 2', 'Player 3', 'Player 4', 'Player 5', 'Player 6']);
+      } else {
+        const id = +this.id;
+        this.getTeam(id);
+      }
     }
   }
 
   getTeam(id: number) {
-    this.teamService.getJsonTeam(id).subscribe(
+    this.teamService.getMysqlTeam(id).subscribe(
       (team: any) => {
         this.team = team;
         },
@@ -40,4 +46,29 @@ export class TeamDetailComponent implements OnInit {
     this.router.navigate(['/team-manager']);
   }
 
+  trackByIndex(index: number, obj: any): any {
+    return index;
+  }
+
+  saveTeam() {
+    this.teamService.createMysqlTeam(
+      {
+        TeamName: this.team.TeamName,
+        Seed: this.team.Seed,
+        captian: this.team.players[0],
+        playerTwo: this.team.players[1],
+        playerThree: this.team.players[2],
+        playerFour: this.team.players[3],
+        playerFive: this.team.players[4],
+        playerSix: this.team.players[5]
+      }
+    ).subscribe(
+      team => {
+        console.log(team.toString());
+      },
+      err => {
+        console.log(err);
+      }
+    );
+  }
 }

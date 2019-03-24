@@ -49,6 +49,13 @@ export class TeamService {
     );
   }
 
+  getMysqlTeam(id: number): Observable<Team | undefined> {
+    return this.http.get<iTeam[]>(this.MysqlUrl).pipe(
+      map(this.mapiTeamsToTeams),
+      map((teams: Team[]) => { return teams.find(t => t.TeamsID === id); })
+    );
+  }
+
   private mapiTeamsToTeams(teams: iTeam[]): Team[] {
     const retVal: Team[] = [];
     teams.forEach((team: iTeam) => {
