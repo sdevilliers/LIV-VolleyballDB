@@ -39,9 +39,9 @@ export class TeamService {
     app.patch('/api/team', updateTeamsHandler);
 
     //api function to delete a team already in the database
-    const deleteTeamsHandler = (req: express.Request, res: express.Response, next: express.NextFunction) => {
-      const myTeam: iTeam = req.body;
-      this._dbManager.deleteTeam(myTeam).then(
+    const deleteTeamsHandler = (req: express.Request, res: express.Response) => {
+      const myTeamID: string = req.params.teamID;
+      this._dbManager.deleteTeam(myTeamID).then(
         (myTeam: iTeam) => { res.send(myTeam); },
         (err: Error) => { res.status(500).send({message: 'deleteTeam error: ' + err.message}); }
       );
