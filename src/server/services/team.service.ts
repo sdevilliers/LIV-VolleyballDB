@@ -64,7 +64,7 @@ export class TeamService {
         }
       );
     };
-    app.delete('/api/teams/:teamID}', deleteTeamsHandler);
+    app.delete('/api/team/:teamID', deleteTeamsHandler);
   }
 }
 

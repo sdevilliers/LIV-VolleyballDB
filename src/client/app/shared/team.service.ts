@@ -66,7 +66,7 @@ export class TeamService {
   }
 
   deleteMySqlTeam(team: iTeam): Observable<iTeam> {
-    return this.http.delete<iTeam>(`/api/teams/${team.TeamsID}`)
+    return this.http.delete<iTeam>(this.MysqlUrl + '/' + team.TeamsID)
       .pipe(
         catchError(this.handleError)
       );
