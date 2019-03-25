@@ -85,7 +85,7 @@ export class DbManager {
     });
   }
 
-  deleteTeam(teamID: string): Promise<iTeam> {
+  deleteTeam(teamID: string): Promise<any> {
     return this.models.teams.destroy({
       where: {TeamsID: teamID}
     });

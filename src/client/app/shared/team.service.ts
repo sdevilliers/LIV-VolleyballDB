@@ -66,14 +66,10 @@ export class TeamService {
   }
 
   deleteMySqlTeam(team: iTeam): Observable<iTeam> {
-    const httpHeaders = new HttpHeaders()
-      .set('Content-Type', 'application/json');
-    const params = new HttpParams().append('teamID', team.TeamsID.toString());
-    const options = {
-      httpHeaders: httpHeaders,
-      params: params
-    };
-    return this.http.delete<iTeam>(this.MysqlUrl, options);
+    return this.http.delete<iTeam>(`/api/teams/${team.TeamsID}`)
+      .pipe(
+        catchError(this.handleError)
+      );
   }
 
   private mapiTeamsToTeams(teams: iTeam[]): Team[] {
