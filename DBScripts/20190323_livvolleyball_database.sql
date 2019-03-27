@@ -1,7 +1,7 @@
 CREATE DATABASE  IF NOT EXISTS `livvolleyball_database`;
-GO;
+
 USE `livvolleyball_database`;
-GO;
+
  SET NAMES utf8;
 
 DROP TABLE IF EXISTS `teams`;
@@ -22,11 +22,9 @@ CREATE TABLE `teams` (
   UNIQUE KEY `TeamName_UNIQUE` (`TeamName`)
 ) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
 
-
 LOCK TABLES `teams` WRITE;
 INSERT INTO `teams` VALUES (1,'Bronco Bulls',1,'Sebastien de Villiers','Mike Keller','Stevey Wonder','Jeremy Briggs','Gorbachev','Dancer'),(2,'Standard Stallions',2,'Ronald Reagan','Mao Zeidong','Mikhail Gorbachev','Luis Fonso','the Villiage','Prancer'),(3,'Spike Spirit',3,'Rue Jones','Jessica Jones','Marc Webber','Leonardo di Crappio','Fred','Roberta'),(4,'Santas Sleigh',4,'Captain Rudolf','Dasher','Prancer','Donner','Vixen','Comet');
-GO;
 
 CREATE USER 'sdevilliers'@'localhost' IDENTIFIED WITH mysql_native_password BY 'Fr!dg3s1';
 GRANT ALL PRIVILEGES ON livvolleyball_database.* TO 'sdevilliers'@'localhost';
-GO;
+
