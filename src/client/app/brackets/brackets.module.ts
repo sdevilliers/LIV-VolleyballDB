@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { BracketsComponent } from './brackets.component';
 import { SharedModule } from '../shared/shared.module';
 import { CellComponent } from '../cell/cell.component';
+import { MatchComponent } from '../match/match.component';
 
 @NgModule({
   imports: [
@@ -9,11 +10,13 @@ import { CellComponent } from '../cell/cell.component';
   ],
   declarations: [
     BracketsComponent,
-    CellComponent
+    CellComponent,
+    MatchComponent
   ],
   exports: [
     BracketsComponent,
-    CellComponent
+    CellComponent,
+    MatchComponent
   ]
 })
 export class BracketsModule { }
