@@ -70,13 +70,13 @@
   <h2>Bracket</h2>
   <p></p>
   <hr style="border:1px grey">
-  <table class='table'>
+  <table class='table' *ngIf="tableData.table">
     <tbody>
     <!-- <tr *ngFor="let row of bracket.tableData; let y = index">
       <td *ngFor="let cell of row; let x = index" [ngClass]="cell.class">
         <span *ngIf="cell.class == 'n' || cell.class == 'u'">Team: <b>{{cell.teamName}}</b></span>
       </td> -->
-    <tr *ngFor="let row of bracket.tableData; let y = index">
+    <tr *ngFor="let row of tableData.table; let y = index">
       <td *ngFor="let cell of row; let x = index" [ngClass]="cell.class">
         <!--<span *ngIf="cell.class == 'n' || cell.class == 'u'">Team: <b>{{ cell.team }}</b></span>-->
         <vb-cell

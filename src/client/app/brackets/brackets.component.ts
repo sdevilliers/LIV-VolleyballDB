@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { BracketLogic } from './bracketLogic';
+import { BracketTable } from './bracketTable';
 import { Team } from '../shared/team';
 import { TeamService } from '../shared/team.service';
+import { Cell } from '../cell/cell';
 
 @Component({
   moduleId: module.id,
@@ -12,6 +14,7 @@ import { TeamService } from '../shared/team.service';
 export class BracketsComponent implements OnInit {
 
   bracket: BracketLogic;    //The data: a bracket object where all the tournament details are kept
+  tableData: BracketTable;
   teamCount: number;
   teams: Team[];
   errorMessage: string;
@@ -21,6 +24,7 @@ export class BracketsComponent implements OnInit {
     if (this.teams === undefined) {
       this.teams = [];
     }
+    this.tableData = new BracketTable();
   }
 
   createBracket(teamCount: number): void {
@@ -49,6 +53,8 @@ export class BracketsComponent implements OnInit {
       alert(alertMessage);
     }
     this.bracket = new BracketLogic(this.teams);
+    this.tableData.setTableOldMethod(this.bracket.rounds, this.bracket.neat);
+    this.tableData.setlines(this.bracket.neat, this.bracket.rounds);
   }
 
   getAllMysqlTeams(): void {
