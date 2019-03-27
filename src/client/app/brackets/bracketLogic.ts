@@ -1,16 +1,15 @@
 import { Cell } from '../cell/cell';
 import { Team } from '../shared/team';
 import { Round } from '../shared/round';
-import { Match } from '../shared/match';
-import { isNullOrUndefined } from 'util';
 
 export class BracketLogic {
 
-    extraMatches: number;                       // the number of matches in the first round of 'messy' bracket
-    firstNeatMatchCount: number;                // matchcount of the first 'neat' round (without a by)
-    neatSeeds: number[];                        // seeds without by
-    messySeeds: number[];                       // seeds that account for the by(s)
-    neat = false;                                // whether or not the bracket has a by
+    neat = false;                               // whether or not the number of teams competing in this bracket is 2^n, where n is an integer
+                                                  // eg. if false, a 'messy' round is needed to sort out the by
+    firstMessyMatchCount: number;                       // the number of matches in the first round of 'non-neat' bracket
+    firstNeatMatchCount: number;                // match count of the first 'neat' round (without a by)
+    neatSeeds: number[];                        // ordered team seeds of the first 'neat' round (round 2 in a 'non-neat' bracket)
+    messySeeds: number[];                       // ordered team seeds of the first ('messy') round in a 'non-neat' bracket
 
     rounds: Round[] = [];
     roundCount: number;
@@ -20,7 +19,8 @@ export class BracketLogic {
 
     constructor(teams: Team[]) {
         this.teams = teams;
-        this.setVariables(teams);
+        //sets the roundCount, firstMessyMatchCount, firsNeatMatchCount,
+        this.setVariables(teams.length);
         //construct a neat or 'messy' bracket as required
         if (this.neat) {
             //create a neat empty rounds array using the teams.length - extra teams
@@ -29,20 +29,23 @@ export class BracketLogic {
         } else {
             this.rounds = this.generateNeat(this.roundCount - 1, this.firstNeatMatchCount);
             this.rounds[0].assignTeams(this.teams, this.neatSeeds);
-            this.rounds = this.addRoundOne(this.rounds, this.messySeeds, this.extraMatches, this.teams);
+            this.rounds = this.addRoundOne(this.rounds, this.messySeeds, this.firstMessyMatchCount, this.teams);
         }
         this.setMatchSeeds(this.teams, this.neatSeeds, this.messySeeds, this.neat);
         this.tableData = this.setTableData(this.rounds, this.tableData, this.neat);
     }
 
-    setVariables(teams: Team[]) {                            // goes through all rounds and sets the roundCount, # of teams above the nearet 'neat' round
+    // Sets the roundCount, neatSeeds, firstMessyMatchCount, firstNeatMatchCount, neatSeeds, messySeeds, and neat properties of this class
+    // All the variables are set at the end of the function
+    setVariables(teamsLength: number) {
         // - Start at the last round and assume team1 v. team2
         let neatSeeds: number[] = [1, 2];
         let roundCount = 1;
+        //loop backwards from the final match of the final round...
         for (
             let prevSeeds: number[] = [];
-            //loop through until the previous round would be too big
-            2 * neatSeeds.length <= teams.length;
+            //...stopping when the previous round would be have more teams than teamsLength
+            2 * neatSeeds.length <= teamsLength;
             roundCount++ , neatSeeds = prevSeeds, prevSeeds = []
         ) {
             const first: number = neatSeeds[1] + 1; //first Seed of the seeds to be added to the previous round
@@ -52,7 +55,7 @@ export class BracketLogic {
             for (let j = 0, k = 0; k < neatSeeds.length; j += 2, k++) {
                 prevSeeds[j] = neatSeeds[k];
             }
-            //pair the teamOne teams with their matching partners according to 1 v last, 1+1 v last-1 ...etc.
+            //pair the teamOne teams with their matching partners according to 1 vs. last, 1+1 vs. last-1 ...etc.
             for (let j = last, k = 1; k <= neatSeeds.length; j-- , k++) {
                 //fills position after where 'k' is with j
                 prevSeeds[prevSeeds.indexOf(k) + 1] = j;
@@ -60,8 +63,8 @@ export class BracketLogic {
             // - move back a round
         }
 
-        const extraMatches = teams.length - neatSeeds.length;
-        let neat: boolean; //Duplicate definition?? THis is also specified at module scope
+        const extraMatches = teamsLength - neatSeeds.length;
+        let neat: boolean;
         let messySeeds: number[] = [];
         if (extraMatches === 0) {
             neat = true;
@@ -98,10 +101,10 @@ export class BracketLogic {
         }
 
         this.roundCount             = roundCount;
-        this.extraMatches           = extraMatches; // the number of matches in the first round of 'messy' bracket
-        this.firstNeatMatchCount    = neatSeeds.length / 2; //matchcount of the first neat round
         this.neatSeeds              = neatSeeds;
+        this.firstNeatMatchCount    = neatSeeds.length / 2;
         this.messySeeds             = messySeeds;
+        this.firstMessyMatchCount   = messySeeds.length / 2;
         this.neat                   = neat;
 
     }
