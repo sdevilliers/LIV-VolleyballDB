@@ -27,7 +27,7 @@ export class Round {                                    //takes in the round # a
         return true;
     }
 
-    //assigns the 'neat' teams of matches given an ordered array of seeds
+    //assigns the 'neat' teams of matches given an ordered and correctly spaced array of seeds
     assignTeams(teams: Team[], seeds: number[]) {
         //loop through the seeds array
         for (let seedIdx = 0, matchIdx = 0; seedIdx < seeds.length; seedIdx++) {
@@ -52,7 +52,7 @@ export class Round {                                    //takes in the round # a
     }
 
     //assigns the locations and teams of 'messy' matches given an array of seeds and the matches in the following round
-    assignLocationsTeams(teams: Team[], messySeeds: number[], nextRound: Match[]) {
+    assignLocationsAndTeams(teams: Team[], messySeeds: number[], nextRound: Match[]) {
         //loop through the seeds array and assign teams
         for (let seedIdx = 0, matchIdx = 0; seedIdx < messySeeds.length; seedIdx++) {
             //if the index is not null
