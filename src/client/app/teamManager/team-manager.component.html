@@ -29,6 +29,7 @@
           <!--<th>Available</th>-->
           <!--<th>Fee Paid</th>-->
           <!--<th>5 Star Rating</th>-->
+          <th></th>
         </tr>
         </thead>
         <tbody>
@@ -50,6 +51,11 @@
           <!--[rating] = "team.starRating"-->
           <!--(ratingClicked) = "onRatingClicked($event)"-->
           <!--&gt;</pm-star></td>-->
+          <td>
+            <button class='btn btn-outline-primary' (click)='deleteTeam(team)'>
+              Delete
+            </button>
+          </td>
         </tr>
         </tbody>
       </table>

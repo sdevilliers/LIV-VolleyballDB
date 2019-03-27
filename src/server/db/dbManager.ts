@@ -48,6 +48,10 @@ export class DbManager {
     });
   }
 
+  readTeams(): Promise<iTeam[]> {
+    return this.models.teams.findAll();
+  }
+
   updateTeam(team: iTeam): Promise<iTeam> {
     return this.models.teams.update(
       {
@@ -81,8 +85,10 @@ export class DbManager {
     });
   }
 
-  readTeams(): Promise<iTeam[]> {
-    return this.models.teams.findAll();
+  deleteTeam(teamID: string): Promise<any> {
+    return this.models.teams.destroy({
+      where: {TeamsID: teamID}
+    });
   }
 
   // updateTeam(team: iTeam): Promise<iTeam> {

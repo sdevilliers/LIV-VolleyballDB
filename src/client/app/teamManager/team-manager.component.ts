@@ -65,4 +65,16 @@ export class TeamManagerComponent implements OnInit {
   newTeam() {
     this.router.navigate(['/team-manager', 'new']);
   }
+
+  deleteTeam(team: iTeam) {
+    this.teamService.deleteMySqlTeam(team).subscribe(
+      team => {
+        console.log(team.toString());
+      },
+      err => {
+        console.log(err);
+      }
+    );
+    //this.router.navigate(['/team-manager']);
+  }
 }

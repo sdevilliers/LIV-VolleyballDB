@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError, tap, map } from 'rxjs/operators';
 
@@ -63,6 +63,13 @@ export class TeamService {
       headers: httpHeaders
     };
     return this.http.patch<iTeam>(this.MysqlUrl, team, options);
+  }
+
+  deleteMySqlTeam(team: iTeam): Observable<iTeam> {
+    return this.http.delete<iTeam>(this.MysqlUrl + '/' + team.TeamsID)
+      .pipe(
+        catchError(this.handleError)
+      );
   }
 
   private mapiTeamsToTeams(teams: iTeam[]): Team[] {

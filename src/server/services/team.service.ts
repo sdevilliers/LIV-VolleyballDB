@@ -13,8 +13,12 @@ export class TeamService {
     const createTeamHandler = (req: express.Request, res: express.Response, next: express.NextFunction) => {
       const myTeam: iTeam = req.body;
       this._dbManager.createTeam(myTeam).then(
-        (myTeam: iTeam) => { res.send(myTeam); },
-        (err: Error) => { res.status(500).send( { message: 'createTeam error:' + err.message }); }
+        (myTeam: iTeam) => {
+          res.send(myTeam);
+        },
+        (err: Error) => {
+          res.status(500).send({message: 'createTeam error: ' + err.message});
+        }
       );
     };
     app.post('/api/team', createTeamHandler);
@@ -22,8 +26,12 @@ export class TeamService {
     //api function to get all the teams from the database
     const readTeamsHandler = (req: express.Request, res: express.Response, next: express.NextFunction) => {
       this._dbManager.readTeams().then(
-        (myTeams: iTeam[]) => { res.send(myTeams); },
-        (err: Error) => { res.status(500).send({message: 'readTeams error:' + err.message}); }
+        (myTeams: iTeam[]) => {
+          res.send(myTeams);
+        },
+        (err: Error) => {
+          res.status(500).send({message: 'readTeams error: ' + err.message});
+        }
       );
     };
     app.get('/api/team', readTeamsHandler);
@@ -32,11 +40,31 @@ export class TeamService {
     const updateTeamsHandler = (req: express.Request, res: express.Response, next: express.NextFunction) => {
       const myTeam: iTeam = req.body;
       this._dbManager.updateTeam(myTeam).then(
-        (myTeam: iTeam) => { res.send(myTeam); },
-        (err: Error) => { res.status(500).send({message: 'updateTeam error:' + err.message}); }
+        (myTeam: iTeam) => {
+          res.send(myTeam);
+        },
+        (err: Error) => {
+          res.status(500).send({message: 'updateTeam error: ' + err.message});
+        }
       );
     };
     app.patch('/api/team', updateTeamsHandler);
+
+    //api function to delete a team already in the database
+    const deleteTeamsHandler = (req: express.Request, res: express.Response, next: any) => {
+      const teamID = req.params.teamID;
+      this._dbManager.deleteTeam(teamID.toString()).then(
+        (x: any) => {
+          if (x != null) {
+            res.send(true);
+          }
+        },
+        (err: Error) => {
+          res.status(500).send({message: 'delete team error: ' + err.message});
+        }
+      );
+    };
+    app.delete('/api/team/:teamID', deleteTeamsHandler);
   }
 }
 

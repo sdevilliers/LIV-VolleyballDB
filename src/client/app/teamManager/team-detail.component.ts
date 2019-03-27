@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { TeamService } from '../shared/team.service';
 import { Team } from '../shared/team';
 import { outOfBoundsError } from '@angular/core/src/di/reflective_errors';
+import { iTeam } from '../shared/iTeam.interface';
 
 
 @Component({
@@ -93,5 +94,17 @@ export class TeamDetailComponent implements OnInit {
         console.log(err);
       }
     );
+  }
+
+  deleteTeam(team: iTeam) {
+    this.teamService.deleteMySqlTeam(team).subscribe(
+      team => {
+        console.log(team.toString());
+      },
+      err => {
+        console.log(err);
+      }
+    );
+    //this.router.navigate(['/team-manager']);
   }
 }

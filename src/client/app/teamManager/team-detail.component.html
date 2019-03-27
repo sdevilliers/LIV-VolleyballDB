@@ -62,5 +62,8 @@
     <button class='btn btn-outline-primary' (click)='updateTeam()' *ngIf="team.TeamsID != undefined">
       <i class='fa fa-chevron-left'></i> Update Team
     </button>
+    <button class='btn btn-outline-primary' (click)='deleteTeam(team)' *ngIf="team.TeamsID != undefined">
+      <i class='fa fa-chevron-left'></i> Delete Team
+    </button>
   </div>
 </div>
