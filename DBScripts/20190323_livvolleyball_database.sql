@@ -60,3 +60,6 @@ UNLOCK TABLES;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
 -- Dump completed on 2019-03-23 15:04:34
+
+CREATE USER 'sdevilliers'@'localhost' IDENTIFIED BY 'Fr!dg3s1';
+GRANT ALL PRIVILEGES ON livvolleyball_database.* TO 'sdevilliers'@'localhost';
