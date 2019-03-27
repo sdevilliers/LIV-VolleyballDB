@@ -4,7 +4,7 @@ import { Team } from '../shared/team';
 @Component({
   moduleId: module.id,
   selector: 'vb-match',
-  templateUrl: './march.component.html',
+  templateUrl: './match.component.html',
   styleUrls: ['./match.component.css']
 })
 

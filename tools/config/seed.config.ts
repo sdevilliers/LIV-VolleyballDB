@@ -183,7 +183,7 @@ export class SeedConfig {
    * `index.html`.
    * @type {string}
    */
-  APP_TITLE = 'Welcome to angular-seed!';
+  APP_TITLE = 'Welcome to LIV-Volleyball!';
 
   /**
    * Tracking ID.

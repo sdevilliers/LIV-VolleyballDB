@@ -5,7 +5,7 @@ describe('App', () => {
   });
 
   it('should have a title', () => {
-    cy.title().should('be.equal', 'Welcome to angular-seed!');
+    cy.title().should('be.equal', 'Welcome to LIV-Volleyball!');
   });
 
   it('should have <nav>', () => {
