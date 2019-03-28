@@ -81,6 +81,7 @@
         <!--<span *ngIf="cell.class == 'n' || cell.class == 'u'">Team: <b>{{ cell.team }}</b></span>-->
         <vb-cell
           [team]="cell.team"
+          [teamChoices]="teams"
           [class]="cell.class"
           (cellClicked)="onTeamClicked($event)"
         ></vb-cell>
