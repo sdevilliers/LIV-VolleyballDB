@@ -1,4 +1,4 @@
-import { Team } from '../shared/team';
+import { Team } from '../../shared/team';
 
 export class Cell {
     team: Team;

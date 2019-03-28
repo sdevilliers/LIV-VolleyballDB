@@ -1,5 +1,5 @@
 import { Component, Input, Output, EventEmitter, OnChanges } from '@angular/core';
-import { Team } from '../shared/team';
+import { Team } from '../../shared/team';
 
 @Component({
   moduleId: module.id,

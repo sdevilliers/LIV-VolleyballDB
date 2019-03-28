@@ -1,4 +1,4 @@
-import { Team } from './team';
+import { Team } from '../../shared/team';
 export class Match {
     matchID: number;        //used to order the matches. begins at 0
     startRowIndex: number;  //the location of the first cell of the match

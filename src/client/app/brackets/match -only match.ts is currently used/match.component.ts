@@ -1,5 +1,5 @@
 import { Component, Input, Output, EventEmitter, OnChanges } from '@angular/core';
-import { Team } from '../shared/team';
+import { Team } from '../../shared/team';
 
 @Component({
   moduleId: module.id,
@@ -7,10 +7,12 @@ import { Team } from '../shared/team';
   templateUrl: './match.component.html',
   styleUrls: ['./match.component.css']
 })
-
+/**
+ * NOT CURRENTLY FUNCTIONAL. TO BE ADDED LATER.
+ */
 export class MatchComponent implements OnChanges{
-  @Input() team: Team;
-  @Input() class: string;
+  @Input() teamOne: Team;
+  @Input() teamTwo: Team;
   position: string;
 
   @Output() cellClicked: EventEmitter<string> = new EventEmitter<string>();
@@ -24,6 +26,6 @@ export class MatchComponent implements OnChanges{
     console.log('ngOnChanges for cell component');
   }
   onClick(): void {
-    this.cellClicked.emit(`The team ${this.team.TeamName} was clicked!`);
+    this.cellClicked.emit(`The team ${this.teamOne.TeamName} was clicked!`);
   }
 }

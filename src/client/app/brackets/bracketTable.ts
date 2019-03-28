@@ -1,6 +1,6 @@
-import { Cell } from '../cell/cell';
+import { Cell } from './cell/cell';
 import { Team } from '../shared/team';
-import { Round } from '../shared/round';
+import { Round } from './round -only round.ts is currently used/round';
 import { BracketLogic } from './bracketLogic';
 
 export class BracketTable {
@@ -14,11 +14,7 @@ export class BracketTable {
 
   // spaceMatchesData(rounds: Round[], tableData: Cell[][], neat: boolean): Cell[][] {}
 
-  setTable(rounds: Round[], neat: boolean): Cell[][]{
-    return [];
-  }
-
-  setTableOldMethod(rounds: Round[], neat: boolean): Cell[][] {
+  setTable(rounds: Round[], neat: boolean): Cell[][] {
     this.table = [];                         //set tableData to an empty array
     //set rowCount to the highest endRowIndex
     let rowCount = 0;
