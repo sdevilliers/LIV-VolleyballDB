@@ -12,8 +12,6 @@ export class BracketTable {
     this.table = [];
   }
 
-  // spaceMatchesData(rounds: Round[], tableData: Cell[][], neat: boolean): Cell[][] {}
-
   setTable(rounds: Round[], neat: boolean): Cell[][] {
     this.table = [];                         //set tableData to an empty array
     //set rowCount to the highest endRowIndex

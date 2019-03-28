@@ -133,13 +133,15 @@ export class BracketLogic {
    * @param teams All the teams in the bracket, ordered starting at teams[0] = #1 team
    */
   addRoundOne(rounds: Round[], messySeeds: number[], firstMessyMatchCount: number, teams: Team[]): Round[] {
-    //shifts the vertical position all the matches in the other rounds down by 1
-    for (const round of rounds) {
-      round.shiftDown(1);
-    }
+    //shift the vertical position all the matches in the other rounds down by 1
+    for (const round of rounds) { round.shiftDown(1); }
+    // create the round
     const roundOne: Round = new Round(firstMessyMatchCount, 0, 0);
+    // fill and adjust spacing
     roundOne.fillMatches(teams, messySeeds);
-    roundOne.assignLocationsAndTeams(teams, messySeeds, rounds[0].matches);
+    //roundOne.assignLocationsAndTeams(teams, messySeeds, rounds[0].matches);
+    roundOne.spaceMatches(rounds[0]);
+    // add roundOne to the rounds array
     rounds.unshift(roundOne);
     return rounds;
   }

@@ -1,6 +1,6 @@
 import { Team } from '../../shared/team';
 export class Match {
-    matchID: number;        //used to order the matches. begins at 0
+    matchIndex: number;        //used to order the matches. begins at 0
     startRowIndex: number;  //the location of the first cell of the match
     endRowIndex: number;    //location of the last cell of the match
     teamOne: Team;
@@ -18,7 +18,7 @@ export class Match {
         teamTwo: Team = new Team(),
         ){
         this.empty = empty;
-        this.matchID = id;
+        this.matchIndex = id;
         this.startRowIndex = cellIndex;
         this.endRowIndex = this.startRowIndex + 1;
         this.teamOne = teamOne;
@@ -27,13 +27,15 @@ export class Match {
 
     // assigns two teams based on specially ordered list of seeded teams
     assignTeams(teams: Team[]){
-        this.teamOne = teams[this.matchID * 2];
-        this.teamTwo = teams[this.matchID * 2 + 1];
+        this.teamOne = teams[this.matchIndex * 2];
+        this.teamTwo = teams[this.matchIndex * 2 + 1];
+        if (this.teamOne.TeamName !== undefined || this.teamTwo.TeamName !== undefined) {
+          this.empty = false;
+        }
     }
 
-    assignSeeds(seed1: number, seed2: number) {
+    assignSeedsling(seed1: number, seed2: number) {
         this.teamOne.Seed = seed1;
         this.teamTwo.Seed = seed2;
     }
-
 }

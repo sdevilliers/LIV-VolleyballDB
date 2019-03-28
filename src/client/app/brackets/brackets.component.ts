@@ -27,7 +27,7 @@ export class BracketsComponent implements OnInit {
     this.tableData = new BracketTable();
   }
 
-  createBracket(teamCount: number): void {
+  createUIBracket(teamCount: number): void {
     //remember after move to ensure that teams cannot be less than 2
     let alertMessage: string;
     if (teamCount > 1 && teamCount <= 2000) {
@@ -44,17 +44,9 @@ export class BracketsComponent implements OnInit {
       alert(alertMessage);
       return;
     } else {
-      alertMessage = 'You didn\'t specify an amount of teams, so we used the database.';
+      alertMessage = 'You didn\'t specify an amount of teams';
     }
-    if (this.teams.length < 2) {
-      alertMessage = 'You don\'t have enough teams to make a tournament. You need at least 2';
-    }
-    if (alertMessage) {
-      alert(alertMessage);
-    }
-    this.bracket = new BracketLogic(this.teams);
-    this.tableData.setTable(this.bracket.rounds, this.bracket.neat);
-    this.tableData.setlines(this.bracket.neat, this.bracket.rounds);
+    this.createBracket(alertMessage);
   }
 
   getAllMysqlTeams(): void {
@@ -67,31 +59,23 @@ export class BracketsComponent implements OnInit {
   }
 
   createMysqlBracket(): void {
-    let alertMessage: string;
-    this.getAllMysqlTeams();
-    if (this.teams.length < 2) {
-      alertMessage = 'You don\'t have enough teams to make a tournament. You need at least 2';
-    }
-    if (alertMessage) {
-      alert(alertMessage);
-    }
-    this.bracket = new BracketLogic(this.teams);
+    this.teamService.getMysqlTeams().subscribe(
+      teams => {
+        this.teams = teams;
+        this.createBracket(this.errorMessage);
+      },
+      error => this.errorMessage = <any>error
+    );
   }
 
   createJsonBracket(): void {
-    let alertMessage: string;
     this.teamService.getJsonTeams().subscribe(
       teams => {
         this.teams = teams;
+        this.createBracket(this.errorMessage);
       },
       error => this.errorMessage = <any>error
-    );    if (this.teams.length < 2) {
-      alertMessage = 'You don\'t have enough teams to make a tournament.';
-    }
-    if (alertMessage) {
-      alert(alertMessage);
-    }
-    this.bracket = new BracketLogic(this.teams);
+    );
   }
 
   saveTeamTest(): void {
@@ -134,5 +118,19 @@ export class BracketsComponent implements OnInit {
 
   onTeamClicked(message: string): void {
     this.teamClickedAlert = message;
+  }
+
+  private createBracket(errorMessage?: string){
+    if (this.teams.length < 2) {
+      errorMessage = 'You don\'t have enough teams to make a tournament. You need at least 2';
+    } else if (this.teams.length > 2000) {
+      errorMessage = 'Too many teams. Try using less than 2000';
+    }
+      if (errorMessage) {
+        alert(errorMessage);
+      }
+    this.bracket = new BracketLogic(this.teams);
+    this.tableData.setTable(this.bracket.rounds, this.bracket.neat);
+    this.tableData.setlines(this.bracket.neat, this.bracket.rounds);
   }
 }

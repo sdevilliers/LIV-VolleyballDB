@@ -44,13 +44,18 @@ export class Round {                                    //takes in the round # a
     }
   }
 
-  // /**
-  //  * Used only for RoundOne
-  //  * Assigns the locations of 'messy' matches to this round
-  //  * @param nextRound The following round i.e. RoundTwo of the 'non-neat' bracket (for proper alignment).
-  //  */
-  // spaceMatches(nextRound: Match[]) {
-  // }
+  /**
+   * Used only for RoundOne
+   * Assigns the locations of 'messy' matches to this round
+   * @param nextRound The following round i.e. RoundTwo of the 'non-neat' bracket (for proper alignment).
+   */
+  spaceMatches(nextRound: Round): Round {
+    for (const match of this.matches) {
+      match.startRowIndex = this.locateNthPosition(match.matchIndex + 1, nextRound);
+      match.endRowIndex = match.startRowIndex + 1;
+    }
+    return this;
+  }
 
   //assigns the locations and teams of 'messy' matches given an array of seeds and the matches in the following round
   assignLocationsAndTeams(teams: Team[], messySeeds: number[], nextRound: Match[]) {
@@ -91,10 +96,10 @@ export class Round {                                    //takes in the round # a
   /**
    * moves the whole round down by the specified number of cells
    */
-  shiftDown(shift: number) {
+  shiftDown(distance: number) {
     for (const match of this.matches) {
-      match.startRowIndex += shift;
-      match.endRowIndex += shift;
+      match.startRowIndex += distance;
+      match.endRowIndex += distance;
     }
   }
 
@@ -135,5 +140,30 @@ export class Round {                                    //takes in the round # a
       i++;
     }
     return orderedTeams;
+  }
+
+  /**
+   * Used only for RoundOne
+   * Locates the startIndex for the Nth match in RoundOne
+   * @param n The number of the match you are trying to find the position for
+   * @param nextRound The following round i.e. RoundTwo of the 'non-neat' bracket (for proper alignment).
+   */
+  private locateNthPosition(n: number, nextRound: Round): number {
+    for (const match of nextRound.matches) {
+      if (match.teamOne.TeamName === undefined) {
+        n--;
+      }
+      if (n === 0) {
+        return match.startRowIndex - 1;
+      }
+      if (match.teamTwo.TeamName === undefined) {
+        n--;
+      }
+      if (n === 0) {
+        return match.endRowIndex;
+      }
+    }
+    console.log('Error: n > #of empty team slots in nextRound');
+    return -1;
   }
 }
