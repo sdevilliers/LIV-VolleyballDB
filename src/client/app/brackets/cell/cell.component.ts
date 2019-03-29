@@ -11,11 +11,12 @@ import { Team } from '../../shared/team';
 export class CellComponent implements OnChanges, OnInit{
   @Input() team: Team;
   @Input() teamChoices: Team[];
-  @Input() class: string;
+  @Input() tdClass: string;
   position: string;
   selectedValue: Team = null;
 
   @Output() cellClicked: EventEmitter<string> = new EventEmitter<string>();
+  disabled: string;
 
   constructor(){ //team: Team = new Team(), cls: string = 'blank'
     //this.team = team;
@@ -23,7 +24,6 @@ export class CellComponent implements OnChanges, OnInit{
   }
 
   ngOnChanges(): void {
-    console.log('ngOnChanges for cell component');
   }
   onClick(): void {
     this.cellClicked.emit(`The team ${this.team.TeamName} was clicked!`);
@@ -32,9 +32,5 @@ export class CellComponent implements OnChanges, OnInit{
   ngOnInit(): void {
     this.selectedValue = this.teamChoices[this.team.Seed - 1];
     this.position = `Team ${this.team.Seed}`;
-  }
-
-  compareFn(t1: Team, t2: Team): boolean {
-    return t1 && t2 ? t1.TeamName === t2.TeamName : t1 === t2;
   }
 }

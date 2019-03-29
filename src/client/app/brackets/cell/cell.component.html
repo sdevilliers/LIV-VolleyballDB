@@ -1,10 +1,23 @@
+<div class="w-100" [title]="position" (click)="onClick()">
+  <div class="input-group"
+       *ngIf="tdClass == 'n' && team.TeamName !== undefined || tdClass == 'u' && team.TeamName !== undefined">
+    <div class="input-group-prepend" style="min-width: 50px">
+      <label class="input-group-text w-100" for="inputGroupSelect01">
+        <span class="text-center font-weight-bold">{{ team.Seed }}</span>
+      </label>
+    </div>
+    <div class="p-2 pb-1 font-weight-bold">
+      {{ team.TeamName }}
+    </div>
+  </div>
 
-<div [title] = "position" (click) = "onClick()">
-  <!--<span *ngIf="class == 'n' || class == 'u'">Team:-->
-<!--<input type='text' /></span>-->
-  <div class="input-group mb-3" *ngIf="class == 'n' || class == 'u'">
-    <div class="input-group-prepend">
-      <label class="input-group-text" for="inputGroupSelect01">{{ team.Seed }}</label>
+
+  <div class="input-group"
+       *ngIf="tdClass == 'n' && team.TeamName === undefined || tdClass == 'u' && team.TeamName === undefined">
+    <div class="input-group-prepend" style="min-width: 50px">
+      <label class="input-group-text w-100" for="inputGroupSelect01">
+        <span class="text-center font-weight-bold">{{ team.Seed }}</span>
+      </label>
     </div>
     <select class="custom-select" id="inputGroupSelect01">
       <option value="" selected="selected">{{ team.TeamName }}</option>
@@ -12,5 +25,4 @@
       <option *ngFor="let t of this.teamChoices" [ngValue]="t.TeamName">{{ t.TeamName }}</option>
     </select>
   </div>
-
 </div>
