@@ -17,6 +17,7 @@ export class TeamDetailComponent implements OnInit {
   errorMessage = '';
   id: string;
   team: Team | undefined;
+  showSpinner1 = false;
 
   constructor(private route: ActivatedRoute,
               private router: Router,
@@ -36,9 +37,11 @@ export class TeamDetailComponent implements OnInit {
   }
 
   getTeam(id: number) {
+    this.showSpinner1 = true;
     this.teamService.getMysqlTeam(id).subscribe(
       (team: any) => {
         this.team = team;
+        this.showSpinner1 = false;
         },
       error => this.errorMessage = <any>error);
   }
@@ -52,6 +55,7 @@ export class TeamDetailComponent implements OnInit {
   }
 
   saveTeam() {
+    this.showSpinner1 = true;
     this.teamService.createMysqlTeam(
       {
         TeamName: this.team.TeamName,
@@ -66,6 +70,7 @@ export class TeamDetailComponent implements OnInit {
     ).subscribe(
       team => {
         console.log(team.toString());
+        this.showSpinner1 = false;
       },
       err => {
         console.log(err);
@@ -74,6 +79,7 @@ export class TeamDetailComponent implements OnInit {
   }
 
   updateTeam() {
+    this.showSpinner1 = true;
     this.teamService.updateMySqlTeam(
       {
         TeamsID: this.team.TeamsID,
@@ -89,6 +95,7 @@ export class TeamDetailComponent implements OnInit {
     ).subscribe(
       team => {
         console.log(team.toString());
+        this.showSpinner1 = false;
       },
       err => {
         console.log(err);
@@ -97,9 +104,11 @@ export class TeamDetailComponent implements OnInit {
   }
 
   deleteTeam(team: iTeam) {
+    this.showSpinner1 = true;
     this.teamService.deleteMySqlTeam(team).subscribe(
       team => {
         console.log(team.toString());
+        this.showSpinner1 = false;
       },
       err => {
         console.log(err);
