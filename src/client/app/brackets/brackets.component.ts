@@ -49,8 +49,8 @@ export class BracketsComponent implements OnInit {
       alertMessage = 'You didn\'t specify an amount of teams';
     }
     this.bShowSpinner1 = true;
-    this.createBracketAsync().then((success: boolean) => {
-      console.log('heyooo');
+    this.sleep(100).then(() => {
+      this.createBracket();
       this.bShowSpinner1 = false;
     });
   }
@@ -128,9 +128,10 @@ export class BracketsComponent implements OnInit {
     this.teamClickedAlert = message;
   }
 
-  createBracketAsync(): Promise<boolean> {
-    return new Promise(resolve => setTimeout(this.createBracket(), 50));
+  sleep = (milliseconds: number) => {
+    return new Promise(resolve => setTimeout(resolve, milliseconds));
   }
+
   private createBracket(errorMessage?: string): boolean {
     if (this.teams.length < 2) {
       errorMessage = 'You don\'t have enough teams to make a tournament. You need at least 2';
