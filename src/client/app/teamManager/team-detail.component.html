@@ -54,16 +54,17 @@
 
   <div class='card-footer'>
     <button class='btn btn-outline-secondary' (click)='onBack()'>
-      <i class='fa fa-chevron-left'></i> Back
+      &lt; Back
     </button>
     <button class='btn btn-primary' (click)='saveTeam()'>
-      <i class='fa fa-chevron-left'></i> Save As New Team
+      Save As New Team
     </button>
     <button class='btn btn-outline-primary' (click)='updateTeam()' *ngIf="team.TeamsID != undefined">
-      <i class='fa fa-chevron-left'></i> Update Team
+      Update Team
     </button>
     <button class='btn btn-outline-primary' (click)='deleteTeam(team)' *ngIf="team.TeamsID != undefined">
-      <i class='fa fa-chevron-left'></i> Delete Team
+      Delete Team
     </button>
+    <span *ngIf="showSpinner1" class="spinner-border spinner-border-sm text-primary" role="status" aria-hidden="false"></span>
   </div>
 </div>
