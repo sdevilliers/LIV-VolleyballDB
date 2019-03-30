@@ -39,3 +39,8 @@ select {
     height: 33px;
     width: 200px
 }
+
+.squareRightCorners {
+  border-bottom-right-radius: 0;
+  border-top-right-radius: 0;
+}
