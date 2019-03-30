@@ -29,13 +29,7 @@ export class TeamManagerComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.teamService.getMysqlTeams().subscribe(
-      teams => {
-        this.teams = teams,
-          this.filteredTeams = this.teams;
-      },
-      error => this.errorMessage = <any>error
-    );
+    this.getTeams();
   }
 
   get listFilter(): string {
@@ -75,6 +69,16 @@ export class TeamManagerComponent implements OnInit {
         console.log(err);
       }
     );
-    //this.router.navigate(['/team-manager']);
+    this.getTeams();
+  }
+
+  private getTeams() {
+    this.teamService.getMysqlTeams().subscribe(
+      teams => {
+        this.teams = teams,
+          this.filteredTeams = this.teams;
+      },
+      error => this.errorMessage = <any>error
+    );
   }
 }

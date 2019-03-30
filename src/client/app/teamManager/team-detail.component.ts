@@ -70,6 +70,7 @@ export class TeamDetailComponent implements OnInit {
     ).subscribe(
       team => {
         console.log(team.toString());
+        this.getTeam(team.TeamsID);
         this.showSpinner1 = false;
       },
       err => {
@@ -114,6 +115,6 @@ export class TeamDetailComponent implements OnInit {
         console.log(err);
       }
     );
-    //this.router.navigate(['/team-manager']);
+    this.router.navigate(['/team-manager']);
   }
 }
