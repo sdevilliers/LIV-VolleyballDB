@@ -1,7 +1,6 @@
 import { Cell } from './cell/cell';
-import { Team } from '../shared/team';
-import { Round } from './round -only round.ts is currently used/round';
 import { BracketLogic } from './bracketLogic';
+import { Round } from './round/round';
 
 export class BracketTable {
   public table: Cell[][];

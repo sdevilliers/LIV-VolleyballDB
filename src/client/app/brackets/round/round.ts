@@ -1,5 +1,5 @@
 import { Team } from '../../shared/team';
-import { Match } from '../match -only match.ts is currently used/match';
+import { Match } from '../match/match';
 
 export class Round {                                    //takes in the round # and teams as parameters to construct the round
 
