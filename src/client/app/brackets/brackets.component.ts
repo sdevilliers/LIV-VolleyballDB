@@ -124,6 +124,12 @@ export class BracketsComponent implements OnInit {
     );
   }
 
+  onKeydown($event: any, teamCnt: number) {
+    if ($event.code === 'Enter'){
+      this.createUIBracket(teamCnt);
+    }
+  }
+
   onTeamClicked(message: string): void {
     this.teamClickedAlert = message;
   }
