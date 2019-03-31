@@ -2,10 +2,15 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TeamService } from '../shared/team.service';
 import { Team } from '../shared/team';
-import { outOfBoundsError } from '@angular/core/src/di/reflective_errors';
 import { iTeam } from '../shared/iTeam.interface';
 
-
+/**
+ * <div class="text-info bg-info">
+ *      This component controls the individual team view.
+ *      It allows the user to see all the details of a team.
+ *      It also provides the user interface to create, update, and delete a team.
+ * </div>
+ */
 @Component({
   moduleId: module.id,
   selector: 'vb-team-detail',

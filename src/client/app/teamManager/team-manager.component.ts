@@ -1,9 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { Team } from '../shared/team';
 import { TeamService } from '../shared/team.service';
 import { iTeam } from '../shared/iTeam.interface';
 import { Router } from '@angular/router';
 
+/**
+ * <div class="text-info bg-info">
+ *     This component provides the user with a overview of all teams in the database.
+ *     Allows for quick removal of undesired teams.
+ *     Provides a base from which to navigate to individual team views.
+ * </div>
+ */
 @Component({
   moduleId: module.id,
   selector: 'vb-team-service',

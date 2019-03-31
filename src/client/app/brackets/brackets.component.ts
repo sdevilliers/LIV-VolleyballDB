@@ -3,8 +3,15 @@ import { BracketLogic } from './bracketLogic';
 import { BracketTable } from './bracketTable';
 import { Team } from '../shared/team';
 import { TeamService } from '../shared/team.service';
-import { Cell } from './cell/cell';
 
+
+/**
+ * <div class="text-info bg-info">
+ *     This Component brings the logic (BracketLogic) and display (BracketTable) classes together.
+ *     It provides user interface to create an empty bracket for a certain number of teams.
+ *     It also allows for the creation of a bracket using the teams in the database, that are retrieved via the TeamService service.
+ * </div>
+ */
 @Component({
   moduleId: module.id,
   selector: 'vb-brackets',

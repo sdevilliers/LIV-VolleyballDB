@@ -2,15 +2,24 @@ import { iTeam } from '../interfaces/iTeam.interface.js';
 import * as express from 'express';
 import { DbManager } from '../db/dbManager';
 
-//server side api
+/**
+ * <div class="text-info bg-info">
+ *     This class is a service that represents the server-side api
+ *     Uses the dbManager class to make changes to the database
+ * </div>
+ */
 export class TeamService {
   private _dbManager: DbManager;
 
   constructor(app: express.Application) {
     this._dbManager = new DbManager();
 
-    //api function to create a team in the database
-    const createTeamHandler = (req: express.Request, res: express.Response, next: express.NextFunction) => {
+    /**
+     * creates a team in the database
+     * @param req The http request from the client side
+     * @param res The http response containing a copy of the team data that was inserted into the database
+     */
+    const createTeamHandler = (req: express.Request, res: express.Response) => {
       const myTeam: iTeam = req.body;
       this._dbManager.createTeam(myTeam).then(
         (myTeam: iTeam) => {
@@ -23,8 +32,12 @@ export class TeamService {
     };
     app.post('/api/team', createTeamHandler);
 
-    //api function to get all the teams from the database
-    const readTeamsHandler = (req: express.Request, res: express.Response, next: express.NextFunction) => {
+    /**
+     * Reads all the teams from the database and sends the data to the client-side
+     * @param req The http request from the client side
+     * @param res The http response containing all the team data in the database
+     */
+    const readTeamsHandler = (req: express.Request, res: express.Response) => {
       this._dbManager.readTeams().then(
         (myTeams: iTeam[]) => {
           res.send(myTeams);
@@ -36,8 +49,12 @@ export class TeamService {
     };
     app.get('/api/team', readTeamsHandler);
 
-    //api function to edit a team already in the database
-    const updateTeamsHandler = (req: express.Request, res: express.Response, next: express.NextFunction) => {
+    /**
+     * Updates a team in the database and sends a copy of the updated team to the client-side
+     * @param req The http request from the client side
+     * @param res The http response containing the team that was updated in the database
+     */
+    const updateTeamHandler = (req: express.Request, res: express.Response, next: express.NextFunction) => {
       const myTeam: iTeam = req.body;
       this._dbManager.updateTeam(myTeam).then(
         (myTeam: iTeam) => {
@@ -48,9 +65,14 @@ export class TeamService {
         }
       );
     };
-    app.patch('/api/team', updateTeamsHandler);
+    app.patch('/api/team', updateTeamHandler);
 
     //api function to delete a team already in the database
+    /**
+     * Deletes a team in the database and sends back 'true' on completion
+     * @param req The http request from the client side
+     * @param res The http response containing the boolean that signals success
+     */
     const deleteTeamsHandler = (req: express.Request, res: express.Response, next: any) => {
       const teamID = req.params.teamID;
       this._dbManager.deleteTeam(teamID.toString()).then(
@@ -67,60 +89,3 @@ export class TeamService {
     app.delete('/api/team/:teamID', deleteTeamsHandler);
   }
 }
-
-
-//   app.post('/api/team-service',
-//     (req: express.Request, res: express.Response,
-//       next: express.NextFunction) => {})
-// //
-// //       this._dbManager.createTeam(this, (err: Error, team: iTeam) => {
-// //   if (err) {
-// //     return cb(err);
-// //   } else {
-// //   return cb(team);
-// // }
-// // });
-// //
-// // this._dbManager.sadd('team-service', request.TeamName,
-// //   (err: any, replies: any) => {
-// //     console.log(`
-// //           Reply: ${replies}.`);
-// //
-// //     res.json({success: true});
-// //   });
-// //
-// // this._dbManager.quit();
-// // });
-//
-// // Read(cb: any): any {
-//   //   // Then read the team
-//   //   this._dbManager.readTeam(this, (err: Error, team: iTeam) => {
-//   //     if (err) {
-//   //       return cb(err);
-//   //     } else {
-//   //       return cb(team);
-//   //     }
-//   //   });
-//   // }
-//   // Update(cb: any): any {
-//   //   // Then save the team
-//   //   this._dbManager.updateTeam(this, (err: Error, team: iTeam) => {
-//   //     if (err) {
-//   //       return cb(err);
-//   //     } else {
-//   //       return cb(team);
-//   //     }
-//   //   });
-//   // }
-//   // Delete(cb: any): any {
-//   //   // Then save the team
-//   //   this._dbManager.deleteTeam(this, (err: Error, team: iTeam) => {
-//   //     if (err) {
-//   //       return cb(err);
-//   //     } else {
-//   //       return cb(team);
-//   //     }
-//   //   });
-//   // }
-// }
-//

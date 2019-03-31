@@ -1,3 +1,7 @@
+/**
+ * <div class="col-md text-danger bg-warning">NOT CURRENTLY FUNCTIONAL. TO BE INCORPORATED IN FUTURE VERSIONS.</div>
+ */
+
 // import { Injectable } from '@angular/core';
 // import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from '@angular/router';
 // import { Observable } from 'rxjs';

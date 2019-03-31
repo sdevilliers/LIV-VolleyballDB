@@ -1,23 +1,25 @@
-import { Cell } from './cell/cell';
 import { Team } from '../shared/team';
 import { Round } from './round/round';
 
-
+/**
+ * <div class="text-info bg-info">
+ *     This Class houses the logic data for a bracket.
+ *     It represents the entire tournament as an array of Rounds.
+ *     The teams are seeded into the first one or two rounds based on an algorithm that sets up stronger teams to play against each other later in the bracket.
+ *     Each consecutive round provides empty Matches for the winners of the previous round.
+ * </div>
+ */
 export class BracketLogic {
 
-  neat = false;                               // whether or not the number of teams competing in this bracket is 2^n, where n is an integer
-  // eg. if false, a 'messy' round is needed to sort out the by
-  firstMessyMatchCount: number;                       // the number of matches in the first round of 'non-neat' bracket
+  neat = false;                               // whether the bracket is neat or non-neat, where neat means that all rounds have an even number of teams without anyone sitting out for a round.
+  firstMessyMatchCount: number;               // the number of matches in the first round of 'non-neat' bracket
   firstNeatMatchCount: number;                // match count of the first 'neat' round (without a by)
-  neatSeeds: number[];                        // ordered team seeds of the first 'neat' round (round 2 in a 'non-neat' bracket)
-                                                // match location specified by index
-  messySeeds: number[];                       // Array of seed values that show the proper order of the teams in the first ('messy') round in a 'non-neat' bracket
-
-  rounds: Round[] = [];
+  neatSeeds: number[];                        // ordered team seeds of the first 'neat' round (round 2 in a 'non-neat' bracket). Match location is specified by index
+  messySeeds: number[];                       // array of seed values that show the proper order of the teams in the first ('messy') round in a 'non-neat' bracket
   roundCount: number;
-  public tableData: Cell[][];                 // dimensions: tableData[row][column] output of the bracketLogic class
+  rounds: Round[] = [];
 
-  private teams: Team[];
+  private readonly teams: Team[];
 
   constructor(teams: Team[]) {
     this.teams = teams;

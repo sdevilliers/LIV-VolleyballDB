@@ -5,6 +5,9 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { throwIfAlreadyLoaded } from './module-import-guard';
 import { ToolbarComponent } from './toolbar/toolbar.component';
 
+/**
+ * This module houses the navigation bar and toolbar
+ */
 @NgModule({
   imports: [RouterModule],
   declarations: [NavbarComponent, ToolbarComponent],

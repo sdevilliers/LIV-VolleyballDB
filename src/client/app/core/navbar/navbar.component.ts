@@ -1,7 +1,10 @@
 import { Component } from '@angular/core';
 
 /**
- * This class represents the navigation bar component.
+ * <div class="text-info bg-info">
+ *     This Component is visible from all screens.
+ *     It allows for user navigation between the BracketsComponent, TeamDetailComponent, and AboutComponent.
+ * </div>
  */
 @Component({
   moduleId: module.id,

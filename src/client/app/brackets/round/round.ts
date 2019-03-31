@@ -1,6 +1,11 @@
 import { Team } from '../../shared/team';
 import { Match } from '../match/match';
 
+/**
+ * <div class="text-info bg-info">
+ *     This Class represents a collection of matches that are played simultaneously.
+ * </div>
+ */
 export class Round {                                    //takes in the round # and teams as parameters to construct the round
 
   matchCount: number;

@@ -11,7 +11,9 @@ import { SharedModule } from './shared/shared.module';
 import { CoreModule } from './core/core.module';
 import { TeamManagerModule } from './teamManager/team-manager.module';
 
-
+/**
+ * This module is at the root of the project and houses everything.
+ */
 @NgModule({
   imports: [BrowserModule, CoreModule,
     HttpClientModule, AppRoutingModule,

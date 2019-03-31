@@ -2,6 +2,13 @@ import { Cell } from './cell/cell';
 import { BracketLogic } from './bracketLogic';
 import { Round } from './round/round';
 
+/**
+ * <div class="text-info bg-info">
+ *     This Class houses the display data for a bracket
+ *     The display data is created by transposing the data contained in the BracketLogic round into a two-dimensional array of type Cell.
+ *     It enables the rounds to be shown vertically in an HTML table even though HTML does not posses native 'table column' elements.
+ * </div>
+ */
 export class BracketTable {
   public table: Cell[][];
 

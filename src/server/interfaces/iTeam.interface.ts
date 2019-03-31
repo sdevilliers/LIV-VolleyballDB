@@ -1,3 +1,8 @@
+/**
+ * <div class="text-info bg-info">
+ *     This interface is used to connect to the client-side service TeamService
+ * </div>
+ */
 export interface iTeam {
   TeamsID: number;
   TeamName: string;

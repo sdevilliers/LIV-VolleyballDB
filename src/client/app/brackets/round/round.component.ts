@@ -1,6 +1,9 @@
 import { Component, Input, Output, EventEmitter, OnChanges } from '@angular/core';
 import { Team } from '../../shared/team';
 
+/**
+ * <div class="col-md text-danger bg-warning">NOT CURRENTLY FUNCTIONAL. TO BE INCORPORATED IN FUTURE VERSIONS.</div>
+ */
 @Component({
   moduleId: module.id,
   selector: 'vb-round',

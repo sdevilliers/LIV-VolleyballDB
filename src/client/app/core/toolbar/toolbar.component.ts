@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 /**
- * This class represents the toolbar component.
+ * This component has no functionality yet but provides a location for future login features.
  */
 @Component({
   moduleId: module.id,

@@ -6,6 +6,11 @@ import { catchError, tap, map } from 'rxjs/operators';
 import { Team } from './team';
 import { iTeam } from './iTeam.interface';
 
+/**
+ * <div class="text-info bg-info">
+ *     This component connects client-side code to the team api in the server side via http requests.
+ * </div>
+ */
 @Injectable({
   providedIn: 'root'
 })

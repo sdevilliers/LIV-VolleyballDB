@@ -1,4 +1,8 @@
 import { Team } from '../../shared/team';
+
+/**
+ * <div class="text-info bg-info">This Class represents a game between two Teams. </div>
+ */
 export class Match {
     matchIndex: number;        //used to order the matches. begins at 0
     startRowIndex: number;  //the location of the first cell of the match
