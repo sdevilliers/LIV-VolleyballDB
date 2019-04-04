@@ -3,6 +3,9 @@ import { BracketsComponent } from './brackets.component';
 import { SharedModule } from '../shared/shared.module';
 import { CellComponent } from './cell/cell.component';
 
+/**
+ * Container class
+ */
 @NgModule({
   imports: [
     SharedModule

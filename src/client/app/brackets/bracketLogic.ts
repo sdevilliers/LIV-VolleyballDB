@@ -6,11 +6,11 @@ import { Round } from './round/round';
 export class BracketLogic {
 
   neat = false;                               // whether or not the number of teams competing in this bracket is 2^n, where n is an integer
-  // eg. if false, a 'messy' round is needed to sort out the by
-  firstMessyMatchCount: number;                       // the number of matches in the first round of 'non-neat' bracket
+                                              // eg. if false, a 'messy' round is needed to sort out the by
+  firstMessyMatchCount: number;               // the number of matches in the first round of 'non-neat' bracket
   firstNeatMatchCount: number;                // match count of the first 'neat' round (without a by)
   neatSeeds: number[];                        // ordered team seeds of the first 'neat' round (round 2 in a 'non-neat' bracket)
-                                                // match location specified by index
+                                              // match location specified by index
   messySeeds: number[];                       // Array of seed values that show the proper order of the teams in the first ('messy') round in a 'non-neat' bracket
 
   rounds: Round[] = [];
@@ -25,19 +25,22 @@ export class BracketLogic {
     this.setVariables(teams.length);
     //construct a neat or 'messy' bracket as required
     if (this.neat) {
-      //create a neat empty rounds array using the teams.length - extra teams
       this.rounds = this.generateNeat(this.roundCount, this.firstNeatMatchCount);
       this.rounds[0].fillMatches(this.teams, this.neatSeeds);
     } else {
+      //create a neat empty rounds array using the firstNeatMatchCount (teams.length - extra teams)
       this.rounds = this.generateNeat(this.roundCount - 1, this.firstNeatMatchCount);
       this.rounds[0].fillMatches(this.teams, this.neatSeeds);
+      //create and insert round one to deal with the by
       this.rounds = this.addRoundOne(this.rounds, this.messySeeds, this.firstMessyMatchCount, this.teams);
     }
-
   }
 
-  // Sets the roundCount, neatSeeds, firstMessyMatchCount, firstNeatMatchCount, neatSeeds, messySeeds, and neat properties of this class
-  // All the variables are set at the end of the function
+  /**
+   * Sets the roundCount, neatSeeds, firstMessyMatchCount, firstNeatMatchCount, neatSeeds, messySeeds, and neat properties of this class
+   * All the variables are set at the end of the function
+   * @param teamsLength The number of teams playing in the bracket.
+   */
   setVariables(teamsLength: number) {
     // - Start at the last round and assume team1 v. team2
     let neatSeeds: number[] = [1, 2];
@@ -110,6 +113,11 @@ export class BracketLogic {
 
   }
 
+  /**
+   * Creates a neat bracket based on a firstNeatMatchCount of a power of 2.
+   * @param roundCount Number of rounds in the created bracket.
+   * @param firstNeatMatchCount Number of matches in the first round. Must be a power of 2.
+   */
   generateNeat(roundCount: number, firstNeatMatchCount: number): Round[] {
     let matchCount = firstNeatMatchCount;
     let gap = 2;                                //number of cells between matches
@@ -147,6 +155,10 @@ export class BracketLogic {
     return rounds;
   }
 
+  /**
+   * Deletes the Null And Undefined Elements of an array.
+   * @param array The array to be modified.
+   */
   private deleteNullAndUndefinedElements(array: number[]): number[] {
     const x: number[] = [];
     for (const item of array) {

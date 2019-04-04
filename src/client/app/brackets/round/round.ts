@@ -57,7 +57,12 @@ export class Round {                                    //takes in the round # a
     return this;
   }
 
-  //assigns the locations and teams of 'messy' matches given an array of seeds and the matches in the following round
+  /**
+   * Assigns the locations and teams of 'messy' matches given an array of seeds and the matches in the following round
+   * @param teams All the teams in the bracket, ordered starting at teams[0] = seed #1 team
+   * @param messySeeds Array of seed values that represent the subset of 'messy' teams (teams in RoundOne of a non-neat bracket) in their proper order
+   * @param nextRound The round following the current round instance in the bracket
+   */
   assignLocationsAndTeams(teams: Team[], messySeeds: number[], nextRound: Match[]) {
     //loop through the seeds array and assign teams
     for (let seedIdx = 0, matchIdx = 0; seedIdx < messySeeds.length; seedIdx++) {

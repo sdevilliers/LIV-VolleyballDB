@@ -3,13 +3,18 @@ import { BracketLogic } from './bracketLogic';
 import { Round } from './round/round';
 
 export class BracketTable {
-  public table: Cell[][];
 
-  private bracket: BracketLogic;
+  public table: Cell[][];
 
   constructor(){
     this.table = [];
   }
+
+  /**
+   * Takes Round data from BracketLogic and maps it to a two-dimensional array
+   * @param rounds All the data for the bracket
+   * @param neat Whether or not the bracket is neat
+   */
 
   setTable(rounds: Round[], neat: boolean): Cell[][] {
     this.table = [];                         //set tableData to an empty array
@@ -54,7 +59,7 @@ export class BracketTable {
   /**
    * Adds the lines to connect the matches
    */
-  setlines(neat: boolean, rounds: Round[]): Cell[][] {
+  setLines(neat: boolean, rounds: Round[]): Cell[][] {
     for (const round of rounds) {
       //length of the lines in cell units = gap two rounds ago. Or = 0, for the first 2 or three rounds
       let length;
